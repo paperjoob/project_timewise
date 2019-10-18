@@ -12,8 +12,8 @@ class AddTime extends Component {
         time: []
     }
 
-    inputHours = () => {
-        console.log('in inputHours')
+    inputHours = (event) => {
+        console.log('in inputHours', event.target.value)
     }
     
     render() {
@@ -44,7 +44,7 @@ class AddTime extends Component {
                             <td>FRI <br/>{this.state.time[4]}</td>
                         </tr>
                         <tr>
-                            <td><input onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
+                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
                             <td><input onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
                             <td><input onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
                             <td><input onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
