@@ -18,10 +18,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import AppNavBar from '../AppNavBar/AppNavBar';
 import Profile from '../Profile/Profile';
 import AddTime from '../AddTime/AddTime';
-
+import TimesheetReport from '../TimesheetReport.js/TimesheetReport';
 
 import './App.css';
-
 
 class App extends Component {
   componentDidMount () {
@@ -69,6 +68,11 @@ class App extends Component {
               exact
               path="/addtime"
               component={AddTime}
+            />
+            <ProtectedRoute
+              exact
+              path="/timesheetreport"
+              component={TimesheetReport}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

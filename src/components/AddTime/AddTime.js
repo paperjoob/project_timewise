@@ -9,7 +9,7 @@ const moment = extendMoment(Moment);
 class AddTime extends Component {
 
     state = {
-        time: []
+        weekday: []
     }
 
     inputHours = (event) => {
@@ -27,7 +27,7 @@ class AddTime extends Component {
         let dates = [];
         for (var i=0; i<5; i++) {
             dates = begin.format('MMM Do');
-            this.state.time.push(dates)
+            this.state.weekday.push(dates)
             begin.add(1, 'd');
         }
 
@@ -37,11 +37,11 @@ class AddTime extends Component {
                     <tbody>
                         <tr><th>Week 1</th></tr>
                         <tr>
-                            <td>MON <br/>{this.state.time[0]}</td>
-                            <td>TUE <br/>{this.state.time[1]}</td>
-                            <td>WED <br/>{this.state.time[2]}</td>
-                            <td>THU <br/>{this.state.time[3]}</td>
-                            <td>FRI <br/>{this.state.time[4]}</td>
+                            <td>MON <br/>{this.state.weekday[0]}</td>
+                            <td>TUE <br/>{this.state.weekday[1]}</td>
+                            <td>WED <br/>{this.state.weekday[2]}</td>
+                            <td>THU <br/>{this.state.weekday[3]}</td>
+                            <td>FRI <br/>{this.state.weekday[4]}</td>
                         </tr>
                         <tr>
                             <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
@@ -62,7 +62,7 @@ class AddTime extends Component {
 }
 
 const mapStateToProps = state => ({
-    profile: state.profile,
+    weekday: state.weekday
   });
 
 export default connect(mapStateToProps) (AddTime);

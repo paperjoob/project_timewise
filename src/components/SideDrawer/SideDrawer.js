@@ -22,6 +22,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import InfoIcon from '@material-ui/icons/Info';
 import AccountIcon from '@material-ui/icons/AccountCircle';
+import ListIcon from '@material-ui/icons/ListAlt'
 
 
 const useStyles = makeStyles({
@@ -72,6 +73,7 @@ function TemporaryDrawer(props) {
                 <ListItem component={Link} to="/home" button><HomeIcon className="icon" /> Home</ListItem>
                 {props.user.username ? <ListItem component={Link} to="/profile" button><AccountIcon className="icon" /> Profile </ListItem> : <div></div> }
                 {props.user.username ? <ListItem component={Link} to="/addtime" button><DashboardIcon className="icon" /> My TimeCard</ListItem> : <div></div>}
+                {props.user.username ? <ListItem component={Link} to="/timesheetreport" button><ListIcon className="icon" /> Timesheet Reports</ListItem> : <div></div>}
                 <ListItem component={Link} to="/about" button><InfoIcon className="icon" /> About</ListItem>
             </List>
 
