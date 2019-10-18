@@ -128,11 +128,11 @@ class Profile extends Component {
 
 const mapStateToProps = state => ({
     profile: state.profile,
-  });
+});
 
-  Profile.propTypes = {
+Profile.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+};
 
 export default withStyles(styles) (connect(mapStateToProps) (Profile));
 

@@ -62,7 +62,7 @@ class AddTime extends Component {
 }
 
 const mapStateToProps = state => ({
-    weekday: state.weekday
+    weeks: state.weeks
   });
 
 export default connect(mapStateToProps) (AddTime);

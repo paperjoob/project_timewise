@@ -8,8 +8,17 @@ router.get('/', (req, res) => {
 });
 
 // GET ROUTE for WEEKDAYS
-router.get('/weekdays', (req, res) => {
-    
+router.get('/weeks', (req, res) => {
+    const queryText = `SELECT * FROM "weeks"`;
+    pool.query(queryText)
+    .then( (result) => {
+        console.log('--Week Days GET ROUTER--', result.rows);
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log('Error retrieving profile data', error);
+        res.sendStatus(500);
+    })
 });
 
 /**
