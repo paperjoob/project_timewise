@@ -3,7 +3,8 @@ import errors from './errorsReducer';
 import loginMode from './loginModeReducer';
 import user from './userReducer';
 import profile from './profileReducer';
-import weeks from './weeksReducer';
+import empDetail from './employeeDetailReducer';
+import addEmployee from './addEmployeeReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
   profile, // contains the user details such as first name, last name
-  weeks, // contains the weeks details
+  empDetail, // contains the weeks details
+  addEmployee
 });
 
 export default rootReducer;

@@ -19,6 +19,8 @@ import AppNavBar from '../AppNavBar/AppNavBar';
 import Profile from '../Profile/Profile';
 import AddTime from '../AddTime/AddTime';
 import TimesheetReport from '../TimesheetReport.js/TimesheetReport';
+import ManageEmployees from '../ManageEmployees/ManageEmployees';
+import AddEmployee from '../AddEmployee/AddEmployee';
 
 import './App.css';
 
@@ -73,6 +75,16 @@ class App extends Component {
               exact
               path="/timesheetreport"
               component={TimesheetReport}
+            />
+            <ProtectedRoute
+              exact
+              path="/manage"
+              component={ManageEmployees}
+            />
+            <ProtectedRoute
+              exact
+              path="/manage/addemployee"
+              component={AddEmployee}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

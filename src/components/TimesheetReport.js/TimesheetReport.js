@@ -18,23 +18,21 @@ class TimesheetReport extends Component {
     render() {
 
             // loop through the profile props to retrieve the the weekdays
-            const weekList = this.props.weeks.map( (weekdays) => {
-                return (  
-                    <>
-                        <li>{weekdays.monday}</li>
-                        <li>{weekdays.tuesday}</li>
-                        <li>{weekdays.wednesday}</li>
-                        <li>{weekdays.thursday}</li>
-                        <li>{weekdays.friday}</li>
-                    </>
-                )
-            })
+            // const weekList = this.props.weeks.map( (weekdays) => {
+            //     return (  
+            //         <>  
+            //             <li>{weekdays.monday}</li>
+            //             <li>{weekdays.tuesday}</li>
+            //             <li>{weekdays.wednesday}</li>
+            //             <li>{weekdays.thursday}</li>
+            //             <li>{weekdays.friday}</li>
+            //         </>
+            //     )
+            // })
         return (
             <div>
                 Hello from TimesheetReport
-                <ul>
-                    {weekList}
-                </ul>
+
             </div>
         )
     }

@@ -1,6 +1,6 @@
-const weeksReducer = (state = [], action) => {
+const employeeDetailReducer = (state = [], action) => {
     switch (action.type) {
-      case 'SET_WEEKS':
+      case 'SET_EMPLOYEE_DETAIL':
         return action.payload;
     //   case 'UNSET_USER':
     //     return {};
@@ -11,4 +11,4 @@ const weeksReducer = (state = [], action) => {
   
   // weeks will be on the redux state at:
   // state.weeks
-  export default weeksReducer;
+  export default employeeDetailReducer;

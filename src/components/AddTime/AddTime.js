@@ -9,7 +9,7 @@ const moment = extendMoment(Moment);
 class AddTime extends Component {
 
     state = {
-        weekday: []
+        weekday: [],
     }
 
     inputHours = (event) => {
@@ -26,7 +26,7 @@ class AddTime extends Component {
     
         let dates = [];
         for (var i=0; i<5; i++) {
-            dates = begin.format('MMM Do');
+            dates = begin.format('MMM Do YYYY');
             this.state.weekday.push(dates)
             begin.add(1, 'd');
         }
@@ -44,11 +44,11 @@ class AddTime extends Component {
                             <td>FRI <br/>{this.state.weekday[4]}</td>
                         </tr>
                         <tr>
-                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
-                            <td><input onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
-                            <td><input onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
-                            <td><input onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
-                            <td><input onChange={(event) => {this.inputHours(event, 'hours')}}></input></td>
+                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'mon_hours')}}></input></td>
+                            <td><input onChange={(event) => {this.inputHours(event, 'tues_hours')}}></input></td>
+                            <td><input onChange={(event) => {this.inputHours(event, 'wed_hours')}}></input></td>
+                            <td><input onChange={(event) => {this.inputHours(event, 'thu_hours')}}></input></td>
+                            <td><input onChange={(event) => {this.inputHours(event, 'fri_hours')}}></input></td>
                         </tr>
                     </tbody>
                 </table>

@@ -71,9 +71,10 @@ function TemporaryDrawer(props) {
             <Divider />
             <List>
                 <ListItem component={Link} to="/home" button><HomeIcon className="icon" /> Home</ListItem>
-                {props.user.username ? <ListItem component={Link} to="/profile" button><AccountIcon className="icon" /> Profile </ListItem> : <div></div> }
+                <ListItem component={Link} to="/profile" button><AccountIcon className="icon" /> Profile </ListItem>
                 {props.user.username ? <ListItem component={Link} to="/addtime" button><DashboardIcon className="icon" /> My TimeCard</ListItem> : <div></div>}
                 {props.user.username ? <ListItem component={Link} to="/timesheetreport" button><ListIcon className="icon" /> Timesheet Reports</ListItem> : <div></div>}
+                {props.user.admin === true ? <ListItem component={Link} to="/manage" button><ListIcon className="icon" /> Manage Employees</ListItem> : <div></div>}
                 <ListItem component={Link} to="/about" button><InfoIcon className="icon" /> About</ListItem>
             </List>
 

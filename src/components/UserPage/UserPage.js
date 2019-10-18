@@ -13,7 +13,7 @@ class UserPage extends Component {
   handleAddTime = () => {
     this.props.history.push('/addtime');
   }
-  
+
   render() {
 
     return (
@@ -22,8 +22,7 @@ class UserPage extends Component {
           Welcome, { this.props.user.username }!
         </h1>
         <p>Employee ID: {this.props.user.id}</p>
-
-        <Notification />
+          <Notification />
         <div className="boardDiv">
         <h2>Time Board</h2>
         <div>

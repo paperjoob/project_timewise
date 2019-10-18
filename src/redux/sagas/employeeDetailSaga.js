@@ -2,15 +2,15 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_WEEKS" actions
-function* fetchWeeks() {
+function* fetchEmpDetails() {
   try {
-    const response = yield axios.get('addtime/weeks');
+    const response = yield axios.get('/manage');
 
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ 
-      type: 'SET_WEEKS', 
+      type: 'SET_EMPLOYEE_DETAIL', 
       payload: response.data 
     });
   } catch (error) {
@@ -18,8 +18,8 @@ function* fetchWeeks() {
   }
 }
 
-function* weekSaga() {
-  yield takeLatest('FETCH_WEEKS', fetchWeeks);
+function* employeeDetailSaga() {
+  yield takeLatest('FETCH_EMPLOYEE_DETAILS', fetchEmpDetails);
 }
 
-export default weekSaga;
+export default employeeDetailSaga;
