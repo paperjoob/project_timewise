@@ -16,7 +16,6 @@ class TimesheetReport extends Component {
         })
     }
 
-
     render() {
 
             //loop through the timesheet reduxstate to retrieve the the weekdays
@@ -29,6 +28,10 @@ class TimesheetReport extends Component {
                         <li>{time.thursday}</li>
                         <li>{time.friday}</li>
                         <li>{time.monday_hours}</li>
+                        <li>{time.tuesday_hours}</li>
+                        <li>{time.wednesday_hours}</li>
+                        <li>{time.thursday_hours}</li>
+                        <li>{time.friday_hours}</li>
                     </>
                 )
             })

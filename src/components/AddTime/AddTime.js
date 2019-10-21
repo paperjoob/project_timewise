@@ -113,7 +113,7 @@ class AddTime extends Component {
                         </tr>
                     </tbody>
                 </table>
-                <p>{JSON.stringify(this.state)}</p>
+                {/* <p>{JSON.stringify(this.state)}</p> */}
                 <button>Cancel</button>
                 <button>Save</button>
                 <button onClick={this.handleSubmit}>Submit</button>

@@ -42,28 +42,19 @@ class ManageEmployees extends Component {
         // loop through the profile props to retrieve the the weekdays
         const employeeList = this.props.empDetail.map( (employee) => {
             return (  
-                <>  
-                    <li>{employee.username} <button>Delete</button></li>
-                    <li>{employee.first_name}</li>
-                    <li>{employee.last_name}</li>
-                    <li>{employee.email}</li>
-                    <li>{employee.street}</li>
-                    <li>{employee.city}</li>
-                    <li>{employee.zipcode}</li>
-                    <li>{employee.phone}</li>
-                    <li>{employee.user_login_id}</li>
-                </>
-            )
-        })
-
-        const usernameList = this.props.empUsernames.map( (employee) => {
-            return (  
-                    <tr key={employee.id}>
-                        <td>{employee.username}</td>
-                        <td>{employee.id}</td>
-                        <td><button onClick={() => {this.handleEdit(employee)} }>Edit User</button></td>
-                        <td><button>Delete</button></td>
-                    </tr>
+                <tr>  
+                    <td>{employee.username}</td>
+                    <td>{employee.id}</td>
+                    <td>{employee.first_name}</td>
+                    <td>{employee.last_name}</td>
+                    <td>{employee.email}</td>
+                    <td>{employee.street}</td>
+                    <td>{employee.city}</td>
+                    <td>{employee.zipcode}</td>
+                    <td>{employee.phone}</td>
+                    <td><button onClick={() => {this.handleEdit(employee)} }>Edit</button></td>
+                    <td><button>Delete</button></td>
+                </tr>
             )
         })
 
@@ -72,15 +63,22 @@ class ManageEmployees extends Component {
                 <div>
                     <table>
                         <tbody>
-                            <tr><th>UserName</th><th>User ID</th></tr>
-                            {usernameList}
+                            <tr>
+                                <th>Username</th>
+                                <th>User ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Street</th>
+                                <th>City</th>
+                                <th>Zipcode</th>
+                                <th>Phone</th>
+                            </tr>
+                            {employeeList}
                         </tbody>
                     </table>
                 </div>
                 <div>
-                    <ul>
-                        {employeeList}
-                    </ul>
                     <button onClick={this.handleAddEmp}>Add Employee</button>
                 </div>
             </div>
@@ -90,7 +88,6 @@ class ManageEmployees extends Component {
 
 const mapStateToProps = state => ({
     empDetail: state.empDetail,
-    empUsernames: state.empUsernames
 });
 
 export default connect(mapStateToProps) (ManageEmployees);

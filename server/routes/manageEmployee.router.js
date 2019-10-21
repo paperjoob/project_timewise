@@ -5,23 +5,23 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const encryptLib = require('../modules/encryption');
 
 // GET EMPLOYEE DETAILS AND USERNAME
-router.get('/', rejectUnauthenticated, (req, res) => {
-   const queryText = `SELECT "user".username, "first_name", "last_name", "email", "street", "city", "state", "zipcode", "phone", "user_login_id" FROM "user_info"
-   JOIN "user" ON "user".id = "user_info".user_login_id;`;
-   pool.query(queryText)
-   .then( (result) => {
-       console.log('--Manage Employee GET ROUTER--', result.rows);
-       res.send(result.rows);
-   })
-   .catch( (error) => {
-       console.log('Error retrieving employee data', error);
-       res.sendStatus(500);
-   })
-});
+// router.get('/', rejectUnauthenticated, (req, res) => {
+//    const queryText = `SELECT "user".username, "first_name", "last_name", "email", "street", "city", "state", "zipcode", "phone", "user_login_id" FROM "user_info"
+//    JOIN "user" ON "user".id = "user_info".user_login_id;`;
+//    pool.query(queryText)
+//    .then( (result) => {
+//        console.log('--Manage Employee GET ROUTER--', result.rows);
+//        res.send(result.rows);
+//    })
+//    .catch( (error) => {
+//        console.log('Error retrieving employee data', error);
+//        res.sendStatus(500);
+//    })
+// });
 
 // GET EMPLOYEE USERNAMES -- ONLY -- 
-router.get('/usernames', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT "username", "id" FROM "user";`;
+router.get('/', rejectUnauthenticated, (req, res) => {
+    const queryText = `SELECT * FROM "user";`;
     pool.query(queryText)
     .then( (result) => {
         console.log('--Manage Employee GET Usernames Server--', result.rows);

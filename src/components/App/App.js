@@ -21,7 +21,7 @@ import AddTime from '../AddTime/AddTime';
 import TimesheetReport from '../TimesheetReport/TimesheetReport';
 import ManageEmployees from '../ManageEmployees/ManageEmployees';
 import AddEmployee from '../AddEmployee/AddEmployee';
-import AddEmployeeDetails from '../AddEmployeeDetails/AddEmployeeDetails';
+import EditEmployeeDetails from '../EditEmployeeDetails/EditEmployeeDetails';
 
 import './App.css';
 
@@ -91,7 +91,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/manage/edit/:id"
-              component={AddEmployeeDetails}
+              component={EditEmployeeDetails}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

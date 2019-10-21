@@ -4,7 +4,6 @@ import loginMode from './loginModeReducer';
 import user from './userReducer';
 import profile from './profileReducer';
 import empDetail from './employeeDetailReducer';
-import empUsernames from './employeeUsernamesReducer'
 import hours from './hoursReducer';
 import addTime from './addTimeReducer';
 import timesheet from './timesheetReducer';
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
   profile, // contains the user details such as first name, last name
   hours, // contains employees hours worked
   empDetail, // contains employee details
-  empUsernames, // contains employee usernames and ids
   addTime, // contains time added
   timesheet, // timesheet
 });
