@@ -1,7 +1,9 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-// worker Saga: will be fired on "REGISTER" actions
+// posting a new employee to the database
+
+// worker Saga: will be fired on "ADD_EMPLOYEE" actions
 function* addUser(action) {
   try {
     // clear any existing error on the registration page
@@ -14,7 +16,7 @@ function* addUser(action) {
       console.log('Error with user registration:', error);
       yield put({type: 'ADD_FAILED'});
   }
-}
+} // end addUser
 
 function* addEmployeeSaga() {
   yield takeLatest('ADD_EMPLOYEE', addUser);

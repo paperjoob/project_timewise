@@ -5,6 +5,7 @@ class AddEmployee extends Component {
   state = {
         username: '',
         password: '',
+        addDetails: false
   };
 
   addUser = (event) => {
@@ -20,7 +21,8 @@ class AddEmployee extends Component {
       });
     } else {
       this.props.dispatch({type: 'ADD_INPUT_ERROR'});
-    }
+    };
+    this.props.history.push('/manage');
   } // end registerUser
 
   handleInputChangeFor = propertyName => (event) => {

@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const profileRouter = require('./routes/profile.router');
 const addTimeRouter = require('./routes/addtime.router');
 const manageEmployeeRouter = require('./routes/manageEmployee.router');
+const timesheetRouter = require('./routes/timesheet.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/profile', profileRouter);
 app.use('/addtime', addTimeRouter);
 app.use('/manage', manageEmployeeRouter);
+app.use('/timesheetreport', timesheetRouter)
 
 // Serve static files
 app.use(express.static('build'));

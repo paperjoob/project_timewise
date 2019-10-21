@@ -18,11 +18,13 @@ import InfoPage from '../InfoPage/InfoPage';
 import AppNavBar from '../AppNavBar/AppNavBar';
 import Profile from '../Profile/Profile';
 import AddTime from '../AddTime/AddTime';
-import TimesheetReport from '../TimesheetReport.js/TimesheetReport';
+import TimesheetReport from '../TimesheetReport/TimesheetReport';
 import ManageEmployees from '../ManageEmployees/ManageEmployees';
 import AddEmployee from '../AddEmployee/AddEmployee';
+import AddEmployeeDetails from '../AddEmployeeDetails/AddEmployeeDetails';
 
 import './App.css';
+
 
 class App extends Component {
   componentDidMount () {
@@ -85,6 +87,11 @@ class App extends Component {
               exact
               path="/manage/addemployee"
               component={AddEmployee}
+            />
+            <ProtectedRoute
+              exact
+              path="/manage/edit/:id"
+              component={AddEmployeeDetails}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

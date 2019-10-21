@@ -9,60 +9,122 @@ const moment = extendMoment(Moment);
 class AddTime extends Component {
 
     state = {
-        weekday: [],
+        employee_id: this.props.user.id,
+        daysWorked: [],
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+        monday_hours: 0,
+        tuesday_hours: 0,
+        wednesday_hours: 0,
+        thursday_hours: 0,
+        friday_hours: 0
+    }
+    componentDidMount(){
+        this.setDates();
+        this.getWeek();
     }
 
-    inputHours = (event) => {
-        console.log('in inputHours', event.target.value)
+    getWeek = () => {
+        this.props.dispatch({
+            type: 'FETCH_TIME',
+        })
     }
-    
-    render() {
+
+    inputHours = (event, propertyName) => {
+        // console.log('in inputHours', event.target.value);
+        this.setState({
+            ...this.state,
+            [propertyName]: event.target.value
+        })
+    }
+
+    handleSubmit = () => {
+        console.log('in handleSubmit');
+        this.props.dispatch({
+            type: 'ADD_TIME', 
+            payload: {
+                employee_id: this.props.user.id,
+                monday: this.state.daysWorked[0],
+                tuesday: this.state.daysWorked[1],
+                wednesday: this.state.daysWorked[2],
+                thursday: this.state.daysWorked[3],
+                friday: this.state.daysWorked[4],
+                monday_hours: parseFloat(this.state.monday_hours),
+                tuesday_hours: parseFloat(this.state.tuesday_hours),
+                wednesday_hours: parseFloat(this.state.wednesday_hours),
+                thursday_hours: parseFloat(this.state.thursday_hours),
+                friday_hours: parseFloat(this.state.friday_hours)
+            }
+        })
+    }
+
+    setDates = () => {
 
         // moment JS
         // loop through the starting date of Monday through Friday
         // then push the days into the state of TIME
+
         let date = moment(),
         begin = moment(date).day(1);
     
         let dates = [];
         for (var i=0; i<5; i++) {
             dates = begin.format('MMM Do YYYY');
-            this.state.weekday.push(dates)
+            let splits = dates.split(',');
+            let dateString = splits.toString();
+            this.state.daysWorked.push(dateString)
             begin.add(1, 'd');
+            console.log(this.state.daysWorked);
         }
+        this.setState({state: this.state})
+    }
+    
+    render() {
+
+        // const dateList = this.state.daysWorked.map( (day, id) => {
+        //     return (
+        //         <tr key={id}>
+        //             <td >{day}</td><td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'hours_worked')}} placeholder='hours'></input></td>
+        //         </tr>
+        //     )
+        // })
 
         return (
             <div>
-                <table className="timeTable">
+                <table >
                     <tbody>
-                        <tr><th>Week 1</th></tr>
+                        <tr><th>Current Week</th></tr>
                         <tr>
-                            <td>MON <br/>{this.state.weekday[0]}</td>
-                            <td>TUE <br/>{this.state.weekday[1]}</td>
-                            <td>WED <br/>{this.state.weekday[2]}</td>
-                            <td>THU <br/>{this.state.weekday[3]}</td>
-                            <td>FRI <br/>{this.state.weekday[4]}</td>
+                            <td>MON <br/>{this.state.daysWorked[0]}</td>
+                            <td>TUE <br/>{this.state.daysWorked[1]}</td>
+                            <td>WED <br/>{this.state.daysWorked[2]}</td>
+                            <td>THU <br/>{this.state.daysWorked[3]}</td>
+                            <td>FRI <br/>{this.state.daysWorked[4]}</td>
                         </tr>
                         <tr>
-                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'mon_hours')}}></input></td>
-                            <td><input onChange={(event) => {this.inputHours(event, 'tues_hours')}}></input></td>
-                            <td><input onChange={(event) => {this.inputHours(event, 'wed_hours')}}></input></td>
-                            <td><input onChange={(event) => {this.inputHours(event, 'thu_hours')}}></input></td>
-                            <td><input onChange={(event) => {this.inputHours(event, 'fri_hours')}}></input></td>
+                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'monday_hours')}} placeholder={this.state.monday_hours}></input></td>
+                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'tuesday_hours')}} placeholder={this.state.tuesday_hours}></input></td>
+                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'wednesday_hours')}} placeholder={this.state.wednesday_hours}></input></td>
+                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'thursday_hours')}} placeholder={this.state.thursday_hours}></input></td>
+                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'friday_hours')}} placeholder={this.state.friday_hours}></input></td>
                         </tr>
                     </tbody>
                 </table>
-
+                <p>{JSON.stringify(this.state)}</p>
                 <button>Cancel</button>
                 <button>Save</button>
-                <button>Submit</button>
+                <button onClick={this.handleSubmit}>Submit</button>
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    weeks: state.weeks
+    hours: state.hours,
+    user: state.user
   });
 
 export default connect(mapStateToProps) (AddTime);

@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     },
 });
 
-function TemporaryDrawer(props) {
+function SideDrawer(props) {
     const classes = useStyles();
     const [state, setState] = React.useState({
         left: false,
@@ -110,4 +110,4 @@ const mapStateToProps = state => ({
     user: state.user,
 });
 
-export default connect(mapStateToProps)(TemporaryDrawer);
+export default connect(mapStateToProps)(SideDrawer);
