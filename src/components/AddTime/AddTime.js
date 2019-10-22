@@ -16,13 +16,14 @@ class AddTime extends Component {
         wednesday: '',
         thursday: '',
         friday: '',
-        monday_hours: this.props.timesheet.monday_hours,
+        monday_hours: 0,
         tuesday_hours: 0,
         wednesday_hours: 0,
         thursday_hours: 0,
-        friday_hours: 0
+        friday_hours: 0,
+        total: 0
     }
-    
+
     componentDidMount(){
         this.setDates();
         this.getWeek();
@@ -80,6 +81,7 @@ class AddTime extends Component {
                 friday_hours: parseFloat(this.state.friday_hours)
             }
         })
+        this.calculateHours();
     }
 
     setDates = () => {
@@ -101,6 +103,17 @@ class AddTime extends Component {
             console.log(this.state.daysWorked);
         }
         this.setState({state: this.state})
+    }
+
+    calculateHours = () => {
+        console.log('in CalculateHours');
+        let mon = this.state.monday_hours;
+        let tue = this.state.tuesday_hours;
+        this.setState({
+            ...this.state.total,
+            total: parseFloat(mon) + parseFloat(tue)
+        })
+        console.log(this.state.total);
     }
     
     render() {
@@ -140,7 +153,8 @@ class AddTime extends Component {
                 <button>Cancel</button>
                 <button onClick={this.handleSave}>Save</button>
                 <button onClick={this.handleSubmit}>Submit</button>
-                <div>Total Hours: </div>
+                <div>Total Hours: {this.state.total} </div>
+                <button onClick={this.calculateHours}>Calculate Hours</button>
             </div>
         )
     }

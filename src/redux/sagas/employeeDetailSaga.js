@@ -15,7 +15,7 @@ function* fetchEmpDetails() {
   }
 }
 
-// 
+// fetches employee details
 function* grabEmployeeDetails(action) {
   try {
     const response = yield axios.get(`/manage/edit/${action.payload}`);
@@ -28,7 +28,7 @@ function* grabEmployeeDetails(action) {
   }
 }
 
-//sends the clicked user ID to the admin router for deletion, then triggers a new GET request
+// sends delete request to its corresponding router for deletion
 function* deleteUser(action) {
   try {
       yield axios.delete(`/manage/${action.payload}`)
@@ -40,12 +40,21 @@ function* deleteUser(action) {
   }
 }
 
-
+// sends put request to router
+function* updateUser(action) {
+  try {
+    const response = yield axios.put(`/manage/`, action.payload);
+    console.log(response);
+  } catch (error) {
+      console.log('Error updating user in UpdateUser SAGA', error)
+  }
+}
 
 function* employeeDetailSaga() {
   yield takeLatest('FETCH_EMPLOYEE_DETAILS', fetchEmpDetails);
   yield takeLatest('FETCH_EMP_DETAILS', grabEmployeeDetails);
   yield takeLatest('DELETE_EMPLOYEE', deleteUser);
+  yield takeLatest('UPDATE_EMPLOYEE', updateUser);
 }
 
 export default employeeDetailSaga;

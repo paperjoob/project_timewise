@@ -21,7 +21,7 @@ const encryptLib = require('../modules/encryption');
 
 // GET EMPLOYEE USERNAMES -- ONLY -- 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT * FROM "user";`;
+    const queryText = `SELECT * FROM "user" ORDER BY "id";`;
     pool.query(queryText)
     .then( (result) => {
         console.log('--Manage Employee GET Usernames Server--', result.rows);
@@ -58,7 +58,7 @@ router.post('/addemployee', (req, res, next) => {
           .catch(() => res.sendStatus(500));
 });
 
-//deletes selected user
+// Delete Route - Deletes a user by its ID
 router.delete('/:id', (req, res) => {
     const queryText = `DELETE FROM "user" WHERE "id" = $1;`
     pool.query(queryText, [req.params.id])
@@ -69,6 +69,32 @@ router.delete('/:id', (req, res) => {
             res.sendStatus(500);
         })
 })
+
+// PUT Route to update a user information
+router.put('/', (req, res) => {
+    const updatedUser = req.body;
+    const queryText = `UPDATE "user" SET "username" = $1, "password" = $2, "first_name" = $3, "last_name" = $4, "email" = $5, "street" = $6, "city" = $7, "state" = $8, "zipcode" = $9, "phone" = $10 WHERE "id" = $11;`;
+    const queryValues = [
+        updatedUser.username,
+        updatedUser.password,
+        updatedUser.first_name,
+        updatedUser.last_name,
+        updatedUser.email,
+        updatedUser.street,
+        updatedUser.city,
+        updatedUser.state,
+        updatedUser.zipcode,
+        updatedUser.phone,
+        updatedUser.id
+    ];
+
+    pool.query(queryText, queryValues)
+        .then(() => {res.sendStatus(200)})
+        .catch((error) => {
+            console.log('Error putting UPDATE IN ROUTE', error);
+            res.sendStatus(500);
+        })
+}); // end PUT ROUTE
 
 /**
  * POST route template
