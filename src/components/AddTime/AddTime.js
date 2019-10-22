@@ -16,12 +16,13 @@ class AddTime extends Component {
         wednesday: '',
         thursday: '',
         friday: '',
-        monday_hours: 0,
+        monday_hours: this.props.timesheet.monday_hours,
         tuesday_hours: 0,
         wednesday_hours: 0,
         thursday_hours: 0,
         friday_hours: 0
     }
+    
     componentDidMount(){
         this.setDates();
         this.getWeek();
@@ -41,10 +42,30 @@ class AddTime extends Component {
         })
     }
 
+    // posts the information to the database
     handleSubmit = () => {
         console.log('in handleSubmit');
         this.props.dispatch({
             type: 'ADD_TIME', 
+            payload: {
+                employee_id: this.props.user.id,
+                monday: this.state.daysWorked[0],
+                tuesday: this.state.daysWorked[1],
+                wednesday: this.state.daysWorked[2],
+                thursday: this.state.daysWorked[3],
+                friday: this.state.daysWorked[4],
+                monday_hours: parseFloat(this.state.monday_hours),
+                tuesday_hours: parseFloat(this.state.tuesday_hours),
+                wednesday_hours: parseFloat(this.state.wednesday_hours),
+                thursday_hours: parseFloat(this.state.thursday_hours),
+                friday_hours: parseFloat(this.state.friday_hours)
+            }
+        });
+    }
+
+    handleSave = () => {
+        this.props.dispatch({
+            type: 'ADD_TIME_TO_REDUX', 
             payload: {
                 employee_id: this.props.user.id,
                 monday: this.state.daysWorked[0],
@@ -105,7 +126,7 @@ class AddTime extends Component {
                             <td>FRI <br/>{this.state.daysWorked[4]}</td>
                         </tr>
                         <tr>
-                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'monday_hours')}} placeholder={this.state.monday_hours}></input></td>
+                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'monday_hours')}} placeholder={this.props.timesheet.monday_hours} ></input></td>
                             <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'tuesday_hours')}} placeholder={this.state.tuesday_hours}></input></td>
                             <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'wednesday_hours')}} placeholder={this.state.wednesday_hours}></input></td>
                             <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'thursday_hours')}} placeholder={this.state.thursday_hours}></input></td>
@@ -113,18 +134,22 @@ class AddTime extends Component {
                         </tr>
                     </tbody>
                 </table>
-                {/* <p>{JSON.stringify(this.state)}</p> */}
+                                <p>{JSON.stringify(this.props.timesheet)}</p>
+                                <p>{JSON.stringify(this.props.timesheet.monday_hours)}</p>
+                                <p>{JSON.stringify(this.props.addTimeToRedux)}</p>
                 <button>Cancel</button>
-                <button>Save</button>
+                <button onClick={this.handleSave}>Save</button>
                 <button onClick={this.handleSubmit}>Submit</button>
+                <div>Total Hours: </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    hours: state.hours,
-    user: state.user
+    user: state.user,
+    timesheet: state.timesheet,
+    addTimeToRedux: state.addTimeToRedux
   });
 
 export default connect(mapStateToProps) (AddTime);

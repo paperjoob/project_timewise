@@ -5,8 +5,8 @@ import user from './userReducer';
 import profile from './profileReducer';
 import empDetail from './employeeDetailReducer';
 import hours from './hoursReducer';
-import addTime from './addTimeReducer';
 import timesheet from './timesheetReducer';
+import addTimeToRedux from './addTimeReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,8 +21,8 @@ const rootReducer = combineReducers({
   profile, // contains the user details such as first name, last name
   hours, // contains employees hours worked
   empDetail, // contains employee details
-  addTime, // contains time added
   timesheet, // timesheet
+  addTimeToRedux,
 });
 
 export default rootReducer;

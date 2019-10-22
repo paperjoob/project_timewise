@@ -1,12 +1,12 @@
-const addTimeReducer = (state = [], action) => {
+const addTimeToReduxReducer = (state = [], action) => {
     switch (action.type) {
-      case 'PLACE_TIME':
-        return [...state, action.payload];
+      case 'ADD_TIME_TO_REDUX':
+        return action.payload;
       default:
         return state;
     }
   };
   
   // user will be on the redux state at:
-  // state.addTime
-  export default addTimeReducer;
+  // state.addTimeToRedux
+  export default addTimeToReduxReducer;

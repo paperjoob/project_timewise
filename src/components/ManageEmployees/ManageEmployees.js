@@ -37,12 +37,20 @@ class ManageEmployees extends Component {
         this.props.history.push(`/manage/edit/${employee.id}`);
     }
 
+    handleDelete = (employee) => {
+        console.log('in handleDELETE');
+        this.props.dispatch({
+            type: 'DELETE_EMPLOYEE',
+            payload: employee.id
+        })
+    }
+
     render() {
 
         // loop through the profile props to retrieve the the weekdays
         const employeeList = this.props.empDetail.map( (employee) => {
             return (  
-                <tr>  
+                <tr key={employee.id}>  
                     <td>{employee.username}</td>
                     <td>{employee.id}</td>
                     <td>{employee.first_name}</td>
@@ -54,7 +62,7 @@ class ManageEmployees extends Component {
                     <td>{employee.zipcode}</td>
                     <td>{employee.phone}</td>
                     <td><button onClick={() => {this.handleEdit(employee)} }>Edit</button></td>
-                    <td><button>Delete</button></td>
+                    <td><button onClick={() => {this.handleDelete(employee)} }>Delete</button></td>
                 </tr>
             )
         })
