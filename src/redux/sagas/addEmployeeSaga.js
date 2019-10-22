@@ -10,10 +10,11 @@ function* addUser(action) {
     yield put({ type: 'CLEAR_EMPLOYEE_ERROR' });
 
     // passes the username and password from the payload to the server
-    yield axios.post('/manage/addemployee', action.payload);
+    const response = yield axios.post(`/manage/addemployee`, action.payload);
+    console.log(response)
     
   } catch (error) {
-      console.log('Error with user registration:', error);
+      console.log('Error with ADDING USER:', error);
       yield put({type: 'ADD_FAILED'});
   }
 } // end addUser

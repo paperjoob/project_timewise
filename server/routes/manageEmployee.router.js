@@ -48,9 +48,10 @@ router.get(`/edit/:id`, (req, res) => {
 router.post('/addemployee', (req, res, next) => {  
         const username = req.body.username;
         const password = encryptLib.encryptPassword(req.body.password);
-      
-        const queryText = 'INSERT INTO "user" (username, password) VALUES ($1, $2) RETURNING id';
-        pool.query(queryText, [username, password])
+        
+        const queryText = `INSERT INTO "user" (username, password, first_name, last_name, email, street, city, state, zipcode, phone)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id`;
+        pool.query(queryText, [username, password, req.body.first_name, req.body.last_name, req.body.email, req.body.street, req.body.city, req.body.state, req.body.zipcode, req.body.phone])
           .then(() => {console.log(req.body.username);
           res.sendStatus(201)
             })

@@ -50,6 +50,7 @@ class ManageEmployees extends Component {
                     <td>{employee.email}</td>
                     <td>{employee.street}</td>
                     <td>{employee.city}</td>
+                    <td>{employee.state}</td>
                     <td>{employee.zipcode}</td>
                     <td>{employee.phone}</td>
                     <td><button onClick={() => {this.handleEdit(employee)} }>Edit</button></td>
@@ -71,6 +72,7 @@ class ManageEmployees extends Component {
                                 <th>Email</th>
                                 <th>Street</th>
                                 <th>City</th>
+                                <th>State</th>
                                 <th>Zipcode</th>
                                 <th>Phone</th>
                             </tr>
