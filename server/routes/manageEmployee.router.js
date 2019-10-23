@@ -73,10 +73,9 @@ router.delete('/:id', (req, res) => {
 // PUT Route to update a user information
 router.put('/', (req, res) => {
     const updatedUser = req.body;
-    const queryText = `UPDATE "user" SET "username" = $1, "password" = $2, "first_name" = $3, "last_name" = $4, "email" = $5, "street" = $6, "city" = $7, "state" = $8, "zipcode" = $9, "phone" = $10 WHERE "id" = $11;`;
+    const queryText = `UPDATE "user" SET "username" = $1, "first_name" = $2, "last_name" = $3, "email" = $4, "street" = $5, "city" = $6, "state" = $7, "zipcode" = $8, "phone" = $9 WHERE "id" = $10;`;
     const queryValues = [
         updatedUser.username,
-        updatedUser.password,
         updatedUser.first_name,
         updatedUser.last_name,
         updatedUser.email,

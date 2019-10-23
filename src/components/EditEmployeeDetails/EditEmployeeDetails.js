@@ -6,7 +6,6 @@ class AddEmployeeDetails extends Component {
     state = {
         editUser: {
             username: '',
-            password: '',
             first_name: '',
             last_name: '',
             email: '',
@@ -32,7 +31,6 @@ class AddEmployeeDetails extends Component {
             this.setState({
                 editUser: {
                     username: edit.username,
-                    password: edit.password,
                     first_name: edit.first_name,
                     last_name: edit.last_name,
                     email: edit.email,
@@ -83,8 +81,6 @@ class AddEmployeeDetails extends Component {
             return (  
                 <form key={employee.id} onSubmit={this.saveChanges}>
                     <label><span>Username</span><input onChange={(event) => {this.handleChange(event, 'username')}} value={this.state.editUser.username}></input></label>
-                    <br />
-                    <label><span>Password</span><input type="password" onChange={(event) => {this.handleChange(event, 'password')}} value={this.state.editUser.password}></input></label>
                     <br />
                     <label><span>First Name</span><input onChange={(event) => {this.handleChange(event, 'first_name')} } value={this.state.editUser.first_name}></input></label>
                     <br />
