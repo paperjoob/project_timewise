@@ -21,7 +21,6 @@ class AddEmployeeDetails extends Component {
     // display employee details
     componentDidMount() {
         this.getProfile();
-
     }
 
     componentDidUpdate = (prevProps) => {

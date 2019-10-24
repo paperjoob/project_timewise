@@ -21,19 +21,39 @@ class AddTime extends Component {
         wednesday_hours: 0,
         thursday_hours: 0,
         friday_hours: 0,
-        total: 0
+        total: 0,
+        submitted: false,
+        is_approved: false,
+        deny_request: false
     }
 
+    // renders onto the DOM
     componentDidMount(){
         this.setDates();
         this.getWeek();
     }
 
+    // sends a dispatch to the Saga to FETCH_TIME
     getWeek = () => {
         this.props.dispatch({
             type: 'FETCH_TIME',
         })
     }
+
+    // componentDidUpdate = (prevProps) => {
+    //     if (this.props.timesheet !== prevProps.timesheet) {
+    //         let time = this.props.timesheet[0]
+    //         this.setState({
+    //                 monday_hours: time.monday_hours,
+    //                 tuesday_hours: time.tuesday_hours,
+    //                 wednesday_hours: time.wednesday_hours,
+    //                 thursday_hours: time.thursday_hours,
+    //                 friday_hours: time.friday_hours,
+    //                 total: time.total,
+    //                 submitted: time.submitted
+    //         })
+    //     }
+    // }
 
     inputHours = (event, propertyName) => {
         // console.log('in inputHours', event.target.value);
@@ -46,6 +66,10 @@ class AddTime extends Component {
     // posts the information to the database
     handleSubmit = () => {
         console.log('in handleSubmit');
+        this.setState({
+            ...this.state.submitted,
+            submitted: true
+        });
         this.props.dispatch({
             type: 'ADD_TIME', 
             payload: {
@@ -59,15 +83,25 @@ class AddTime extends Component {
                 tuesday_hours: parseFloat(this.state.tuesday_hours),
                 wednesday_hours: parseFloat(this.state.wednesday_hours),
                 thursday_hours: parseFloat(this.state.thursday_hours),
-                friday_hours: parseFloat(this.state.friday_hours)
+                friday_hours: parseFloat(this.state.friday_hours),
+                total: parseFloat(this.state.total),
+                submitted: this.state.submitted,
+                is_approved: this.state.is_approved,
+                deny_request: this.state.deny_request
             }
         });
+        this.calculateHours();
+        console.log(this.state.submitted)
     }
 
     handleSave = () => {
+        this.setState({
+            ...this.state.submitted,
+            submitted: true
+        });
         this.props.dispatch({
             type: 'ADD_TIME_TO_REDUX', 
-            payload: {
+            payload: [{
                 employee_id: this.props.user.id,
                 monday: this.state.daysWorked[0],
                 tuesday: this.state.daysWorked[1],
@@ -78,8 +112,9 @@ class AddTime extends Component {
                 tuesday_hours: parseFloat(this.state.tuesday_hours),
                 wednesday_hours: parseFloat(this.state.wednesday_hours),
                 thursday_hours: parseFloat(this.state.thursday_hours),
-                friday_hours: parseFloat(this.state.friday_hours)
-            }
+                friday_hours: parseFloat(this.state.friday_hours),
+                submitted: this.state.submitted
+            }]
         })
         this.calculateHours();
     }
@@ -92,7 +127,7 @@ class AddTime extends Component {
 
         let date = moment(),
         begin = moment(date).day(1);
-    
+        console.log(begin)
         let dates = [];
         for (var i=0; i<5; i++) {
             dates = begin.format('MMM Do YYYY');
@@ -100,7 +135,7 @@ class AddTime extends Component {
             let dateString = splits.toString();
             this.state.daysWorked.push(dateString)
             begin.add(1, 'd');
-            console.log(this.state.daysWorked);
+            console.log('SET DATES CONSOLE', this.state.daysWorked, begin);
         }
         this.setState({state: this.state})
     }
@@ -109,9 +144,12 @@ class AddTime extends Component {
         console.log('in CalculateHours');
         let mon = this.state.monday_hours;
         let tue = this.state.tuesday_hours;
+        let wed = this.state.wednesday_hours;
+        let thu = this.state.thursday_hours;
+        let fri = this.state.friday_hours;
         this.setState({
             ...this.state.total,
-            total: parseFloat(mon) + parseFloat(tue)
+            total: parseFloat(mon) + parseFloat(tue) + parseFloat(wed) + parseFloat(thu) + parseFloat(fri)
         })
         console.log(this.state.total);
     }
@@ -139,7 +177,7 @@ class AddTime extends Component {
                             <td>FRI <br/>{this.state.daysWorked[4]}</td>
                         </tr>
                         <tr>
-                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'monday_hours')}} placeholder={this.props.timesheet.monday_hours} ></input></td>
+                            <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'monday_hours')}} placeholder={this.state.monday_hours} ></input></td>
                             <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'tuesday_hours')}} placeholder={this.state.tuesday_hours}></input></td>
                             <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'wednesday_hours')}} placeholder={this.state.wednesday_hours}></input></td>
                             <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'thursday_hours')}} placeholder={this.state.thursday_hours}></input></td>

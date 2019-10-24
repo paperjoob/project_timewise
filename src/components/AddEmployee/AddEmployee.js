@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+import Swal from 'sweetalert2'
+
 class AddEmployee extends Component {
   state = {
       username: '',
@@ -15,31 +17,68 @@ class AddEmployee extends Component {
       phone: '',
   };
 
-  addUser = (event) => {
-    event.preventDefault();
+//   addUser = (event) => {
 
-    if (this.state.username && this.state.password) {
-      this.props.dispatch({
-        type: 'ADD_EMPLOYEE',
-        payload: {
-          username: this.state.username,
-          password: this.state.password,
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
-          email: this.state.email,
-          street: this.state.street,
-          city: this.state.city,
-          state: this.state.state,
-          zipcode: this.state.zipcode,
-          phone: this.state.phone
-        },
-      });
-    } else {
-      this.props.dispatch({type: 'ADD_INPUT_ERROR'});
-    };
-    // this.props.history.push('/manage');
-    console.log(this.state)
-  } // end registerUser
+//     if (this.state.username && this.state.password) {
+//       this.props.dispatch({
+//         type: 'ADD_EMPLOYEE',
+//         payload: {
+//           username: this.state.username,
+//           password: this.state.password,
+//           first_name: this.state.first_name,
+//           last_name: this.state.last_name,
+//           email: this.state.email,
+//           street: this.state.street,
+//           city: this.state.city,
+//           state: this.state.state,
+//           zipcode: this.state.zipcode,
+//           phone: this.state.phone
+//         },
+//       });
+//     } else {
+//       this.props.dispatch({type: 'ADD_INPUT_ERROR'});
+//     };
+//     // this.props.history.push('/manage');
+//     console.log(this.state)
+//   } // end registerUser
+
+// swal alert for adding user
+handleAdd = (event) => {
+    event.preventDefault();
+
+    Swal.fire({
+        title: 'Are all fields correct',
+        text: "Add new",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, create new user!'
+      }).then((willAdd) => {
+        if (willAdd.value) {
+          this.props.dispatch({
+          type: 'ADD_EMPLOYEE',
+          payload: {
+            username: this.state.username,
+            password: this.state.password,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            email: this.state.email,
+            street: this.state.street,
+            city: this.state.city,
+            state: this.state.state,
+            zipcode: this.state.zipcode,
+            phone: this.state.phone
+            },
+          })
+          Swal.fire(
+            'Success!',
+            'User has been added',
+            'success'
+          )
+        }   
+    })
+}
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -58,7 +97,7 @@ class AddEmployee extends Component {
             {this.props.errors.addEmployeeMessage}
           </h2>
         )}
-        <form onSubmit={this.addUser}>
+        <form onSubmit={this.handleAdd}>
           <h1>ADD NEW EMPLOYEE</h1>
           <div>
             <label htmlFor="username">

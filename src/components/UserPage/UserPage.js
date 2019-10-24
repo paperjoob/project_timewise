@@ -4,15 +4,57 @@ import { connect } from 'react-redux';
 import './UserPage.css';
 import Notification from '../Notification/Notification';
 
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
+
+const moment = extendMoment(Moment);
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
 class UserPage extends Component {
 
+  state = {
+    daysWorked: []
+  }
+
+    // renders onto the DOM
+    componentDidMount(){
+        this.setDates();
+        this.getWeek();
+    }
+
+    // sends a dispatch to the Saga to FETCH_TIME
+    getWeek = () => {
+        this.props.dispatch({
+            type: 'FETCH_TIME',
+        })
+    }
+
   handleAddTime = () => {
     this.props.history.push('/addtime');
   }
+
+  setDates = () => {
+
+    // moment JS
+    // loop through the starting date of Monday through Friday
+    // then push the days into the state of TIME
+
+    let date = moment(),
+    begin = moment(date).day(1);
+
+    let dates = [];
+    for (var i=0; i<5; i++) {
+        dates = begin.format('MMM Do YYYY');
+        let splits = dates.split(',');
+        let dateString = splits.toString();
+        this.state.daysWorked.push(dateString)
+        begin.add(1, 'd');
+        console.log(this.state.daysWorked);
+    }
+    this.setState({state: this.state})
+}
 
   render() {
 
@@ -31,13 +73,13 @@ class UserPage extends Component {
         <br />
         <table className="timeTable">
             <tbody>
-                <tr><th>Week 1</th></tr>
+                <tr><th>Current Week</th></tr>
                 <tr>
-                    <td>Mon</td>
-                    <td>TUE</td>
-                    <td>WED</td>
-                    <td>THU</td>
-                    <td>FRI</td>
+                    <td>MON <br/>{this.state.daysWorked[0]}</td>
+                    <td>TUE <br/>{this.state.daysWorked[1]}</td>
+                    <td>WED <br/>{this.state.daysWorked[2]}</td>
+                    <td>THU <br/>{this.state.daysWorked[3]}</td>
+                    <td>FRI <br/>{this.state.daysWorked[4]}</td>
                 </tr>
                 <tr>
                     <td><input className="boardInput"></input></td>

@@ -60,14 +60,18 @@ router.post('/addemployee', (req, res, next) => {
 
 // Delete Route - Deletes a user by its ID
 router.delete('/:id', (req, res) => {
-    const queryText = `DELETE FROM "user" WHERE "id" = $1;`
-    pool.query(queryText, [req.params.id])
-        .then((result) => {
-            res.sendStatus(200)
-        }).catch((error) => {
-            console.log('Error deleting user', error);
-            res.sendStatus(500);
-        })
+    if (req.user.admin) {
+        const queryText = `DELETE FROM "user" WHERE "id" = $1;`
+        pool.query(queryText, [req.params.id])
+            .then((result) => {
+                res.sendStatus(200)
+            }).catch((error) => {
+                console.log('Error deleting user', error);
+                res.sendStatus(500);
+            })
+    } else {
+        res.sendStatus(403);
+    }
 })
 
 // PUT Route to update a user information

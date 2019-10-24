@@ -83,6 +83,8 @@ class ManageEmployees extends Component {
                                 <th>State</th>
                                 <th>Zipcode</th>
                                 <th>Phone</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                             {employeeList}
                         </tbody>
