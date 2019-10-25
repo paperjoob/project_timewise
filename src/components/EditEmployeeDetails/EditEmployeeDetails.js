@@ -72,6 +72,7 @@ class AddEmployeeDetails extends Component {
         event.preventDefault();
         console.log(this.state.editUser)
         this.props.dispatch({ type: 'UPDATE_EMPLOYEE', payload: this.state.editUser})
+        this.props.history.push('/manage');
     }
 
     render() {

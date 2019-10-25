@@ -65,7 +65,7 @@ class AddTime extends Component {
                     thursday_hours: 0,
                     friday_hours: 0,
                     total: 0,
-                    submitted: 0
+                    submitted: false
                 })
             }
         }
@@ -83,7 +83,7 @@ class AddTime extends Component {
     handleSubmit = () => {
         console.log('in handleSubmit', parseFloat(this.state.monday_hours));
         this.setState({
-            ...this.state,
+            ...this.state.submitted,
             submitted: true
         });
         if (this.state.submitted === true) {
@@ -99,7 +99,6 @@ class AddTime extends Component {
                 confirmButtonText: 'Yes'
               }).then((result) => {
                 if (result.value) {
-                    console.log('CONSOJDFOSDF', this.state);
                     this.props.dispatch({
                         type: 'ADD_TIME', 
                         payload: {
@@ -109,7 +108,7 @@ class AddTime extends Component {
                             wednesday: this.state.daysWorked[2],
                             thursday: this.state.daysWorked[3],
                             friday: this.state.daysWorked[4],
-                            monday_hours: 8,
+                            monday_hours: this.state.monday_hours,
                             tuesday_hours: this.state.tuesday_hours,
                             wednesday_hours: parseFloat(this.state.wednesday_hours),
                             thursday_hours: parseFloat(this.state.thursday_hours),
@@ -131,11 +130,8 @@ class AddTime extends Component {
                   )
                 }
               })
-
         }
-        
         this.calculateHours();
-        console.log(this.state.submitted)
     }
 
     setDates = () => {
@@ -146,7 +142,6 @@ class AddTime extends Component {
 
         let date = moment(),
         begin = moment(date).day(1);
-        console.log(begin)
         let dates = [];
         for (var i=0; i<5; i++) {
             dates = begin.format('MMM Do YYYY');
@@ -154,14 +149,13 @@ class AddTime extends Component {
             let dateString = splits.toString();
             this.state.daysWorked.push(dateString)
             begin.add(1, 'd');
-            console.log('SET DATES CONSOLE', this.state.daysWorked, begin);
         }
         this.setState({state: this.state})
         // get request
     }
 
+    // sums up week hours
     calculateHours = () => {
-        console.log('in CalculateHours');
         let mon = this.state.monday_hours;
         let tue = this.state.tuesday_hours;
         let wed = this.state.wednesday_hours;
@@ -171,7 +165,12 @@ class AddTime extends Component {
             ...this.state.total,
             total: parseFloat(mon) + parseFloat(tue) + parseFloat(wed) + parseFloat(thu) + parseFloat(fri)
         })
-        console.log(this.state.total);
+        console.log('in CALCULATE HOURS', this.state.total);
+    }
+
+    // takes user back to home page
+    handleCancel = () => {
+        this.props.history.push('/home');
     }
     
     render() {
@@ -207,7 +206,7 @@ class AddTime extends Component {
                     </tbody>
                 </table>
                                 {/* <p>{JSON.stringify(this.props.timesheet)}</p> */}
-                <button>Cancel</button>
+                <button onClick={this.handleCancel}>Cancel</button>
                 <button onClick={this.handleSubmit}>Submit</button>
                 <div>Total Hours: {this.state.total} </div>
             </div>
