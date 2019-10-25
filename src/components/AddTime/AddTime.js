@@ -73,43 +73,48 @@ class AddTime extends Component {
             ...this.state.submitted,
             submitted: true
         });
-        Swal.fire({
-            title: 'Are all of the information correct?',
-            text: "You will not be able to make any changes after submittal. Proceed?",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
-          }).then((result) => {
-            if (result.value) {
-                this.props.dispatch({
-                    type: 'ADD_TIME', 
-                    payload: {
-                        employee_id: this.props.user.id,
-                        monday: this.state.daysWorked[0],
-                        tuesday: this.state.daysWorked[1],
-                        wednesday: this.state.daysWorked[2],
-                        thursday: this.state.daysWorked[3],
-                        friday: this.state.daysWorked[4],
-                        monday_hours: parseFloat(this.state.monday_hours),
-                        tuesday_hours: parseFloat(this.state.tuesday_hours),
-                        wednesday_hours: parseFloat(this.state.wednesday_hours),
-                        thursday_hours: parseFloat(this.state.thursday_hours),
-                        friday_hours: parseFloat(this.state.friday_hours),
-                        total: parseFloat(this.state.total),
-                        submitted: this.state.submitted,
-                        is_approved: this.state.is_approved,
-                        deny_request: this.state.deny_request
-                    }
-                });
-              Swal.fire(
-                'Success',
-                'Timesheet submitted!',
-                'success'
-              )
-            }
-          })
+        if (this.state.submitted === true) {
+            alert ('Your time for this week has already been submitted.');
+        } else {
+            Swal.fire({
+                title: 'Are all of the information correct?',
+                text: "You will not be able to make any changes after submittal. Proceed?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                if (result.value) {
+                    this.props.dispatch({
+                        type: 'ADD_TIME', 
+                        payload: {
+                            employee_id: this.props.user.id,
+                            monday: this.state.daysWorked[0],
+                            tuesday: this.state.daysWorked[1],
+                            wednesday: this.state.daysWorked[2],
+                            thursday: this.state.daysWorked[3],
+                            friday: this.state.daysWorked[4],
+                            monday_hours: parseFloat(this.state.monday_hours),
+                            tuesday_hours: parseFloat(this.state.tuesday_hours),
+                            wednesday_hours: parseFloat(this.state.wednesday_hours),
+                            thursday_hours: parseFloat(this.state.thursday_hours),
+                            friday_hours: parseFloat(this.state.friday_hours),
+                            total: parseFloat(this.state.total),
+                            submitted: this.state.submitted,
+                            is_approved: this.state.is_approved,
+                            deny_request: this.state.deny_request
+                        }
+                    });
+                  Swal.fire(
+                    'Success',
+                    'Timesheet submitted!',
+                    'success'
+                  )
+                }
+              })
+        }
+        
         this.calculateHours();
         console.log(this.state.submitted)
     }
