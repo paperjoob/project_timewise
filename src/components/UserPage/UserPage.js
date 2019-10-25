@@ -64,7 +64,7 @@ class UserPage extends Component {
           Welcome, { this.props.user.username }!
         </h1>
         <p>Employee ID: {this.props.user.id}</p>
-          <Notification />
+          <Notification history={this.props.history}/>
         <div className="boardDiv">
         <h2>Time Board</h2>
         <div>

@@ -10,7 +10,7 @@ function* fetchNotification() {
       payload: response.data 
     });
   } catch (error) {
-    console.log('User get request failed', error);
+    console.log('--NOTIFICATION get request failed', error);
   }
 }
 

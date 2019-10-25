@@ -1,39 +1,41 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import Toast from 'react-bootstrap/Toast';
-
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
 class Notification extends Component {
 
-  state = {
-    showNotification: false
+  componentDidMount() {
+    this.getNotifications();
   }
 
-  toggleShowNotifcation = () => {
-    this.setState({
-      showNotification: !this.state.showNotification
+  getNotifications = () => {
+    this.props.dispatch({
+      type: 'FETCH_NOTIFICATION_ADMIN'
     })
+    console.log('in GET NOTIFICATIONS', this.props.adminNotification)
+  }
+
+  handleReview = () => {
+    this.props.history.push('/review')
   }
 
   render() {
+
+    const notificationList = this.props.adminNotification.map( (notify) => {
+      return (  
+        <>
+        <li>{notify.first_name} {notify.last_name} has submitted the timesheet beginning on {notify.monday}. <button onClick={this.handleReview}>Review Request</button></li>
+        </>
+      )
+  })
     return (
       <div>
         <h2>Notifications</h2>
-        <Toast className='toastme' show={this.showNotification} onClose={this.toggleShowNotifcation}>
-          <Toast.Header>
-              <img
-              src="holder.js/20x20?text=%20"
-              className="rounded mr-2"
-              alt=""
-              />
-              <strong className="mr-auto">Bootstrap Spike</strong>
-              <small>Click on the X to dismiss this toast</small>
-          </Toast.Header>
-          <Toast.Body>This is a Toast!</Toast.Body>
-        </Toast>
+        <ul>
+          {notificationList}
+        </ul>
       </div>
     )
   }
@@ -44,7 +46,7 @@ class Notification extends Component {
 // const mapStateToProps = ({user}) => ({ user });
 
 const mapStateToProps = state => ({
-  user: state.user,
+  adminNotification: state.adminNotification
 });
 
 // this allows us to use <App /> in index.js

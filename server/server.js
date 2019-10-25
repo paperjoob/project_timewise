@@ -33,7 +33,7 @@ app.use('/profile', profileRouter);
 app.use('/addtime', addTimeRouter);
 app.use('/manage', manageEmployeeRouter);
 app.use('/timesheetreport', timesheetRouter);
-app.use('/notifcation', notificationRouter);
+app.use('/notification', notificationRouter);
 
 // Serve static files
 app.use(express.static('build'));

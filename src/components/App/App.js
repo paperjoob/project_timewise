@@ -24,6 +24,7 @@ import AddEmployee from '../AddEmployee/AddEmployee';
 import EditEmployeeDetails from '../EditEmployeeDetails/EditEmployeeDetails';
 
 import './App.css';
+import ReviewRequest from '../ReviewRequest/ReviewRequest';
 
 
 class App extends Component {
@@ -92,6 +93,11 @@ class App extends Component {
               exact
               path="/manage/edit/:id"
               component={EditEmployeeDetails}
+            />
+            <ProtectedRoute
+              exact
+              path="/review"
+              component={ReviewRequest}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
