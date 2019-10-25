@@ -17,31 +17,6 @@ class AddEmployee extends Component {
       phone: '',
   };
 
-//   addUser = (event) => {
-
-//     if (this.state.username && this.state.password) {
-//       this.props.dispatch({
-//         type: 'ADD_EMPLOYEE',
-//         payload: {
-//           username: this.state.username,
-//           password: this.state.password,
-//           first_name: this.state.first_name,
-//           last_name: this.state.last_name,
-//           email: this.state.email,
-//           street: this.state.street,
-//           city: this.state.city,
-//           state: this.state.state,
-//           zipcode: this.state.zipcode,
-//           phone: this.state.phone
-//         },
-//       });
-//     } else {
-//       this.props.dispatch({type: 'ADD_INPUT_ERROR'});
-//     };
-//     // this.props.history.push('/manage');
-//     console.log(this.state)
-//   } // end registerUser
-
 // swal alert for adding user
 handleAdd = (event) => {
     event.preventDefault();
@@ -85,6 +60,11 @@ handleAdd = (event) => {
       [propertyName]: event.target.value,
     });
   }
+
+  // cancels changes and brings user back to /manage
+  handleBack = () => {
+    this.props.history.push('/manage');
+  }
 
   render() {
     return (
@@ -218,7 +198,8 @@ handleAdd = (event) => {
             />
           </div>
         </form>
-        <p>{JSON.stringify(this.state)}</p>
+        <button onClick={this.handleBack}>Back</button>
+{/*         <p>{JSON.stringify(this.state)}</p> */}
       </div>
     );
   }

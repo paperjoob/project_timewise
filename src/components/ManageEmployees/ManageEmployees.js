@@ -91,6 +91,7 @@ class ManageEmployees extends Component {
 
         return (
             <div>
+                <h1>Employee Information</h1>
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>
