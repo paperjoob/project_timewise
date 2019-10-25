@@ -43,20 +43,33 @@ class AddTime extends Component {
         })
     }
 
-    // componentDidUpdate = (prevProps) => {
-    //     if (this.props.timesheet !== prevProps.timesheet) {
-    //         let time = this.props.timesheet[0]
-    //         this.setState({
-    //                 monday_hours: time.monday_hours,
-    //                 tuesday_hours: time.tuesday_hours,
-    //                 wednesday_hours: time.wednesday_hours,
-    //                 thursday_hours: time.thursday_hours,
-    //                 friday_hours: time.friday_hours,
-    //                 total: time.total,
-    //                 submitted: time.submitted
-    //         })
-    //     }
-    // }
+    componentDidUpdate = (prevProps) => {
+        console.log('DID UPDATE', this.props)
+        if (this.props.timesheet !== prevProps.timesheet) {
+            let time = this.props.timesheet[0]
+            if(this.props.timesheet[0]){
+                this.setState({
+                        monday_hours: time.monday_hours || 0,
+                        tuesday_hours: time.tuesday_hours || 0,
+                        wednesday_hours: time.wednesday_hours || 0,
+                        thursday_hours: time.thursday_hours || 0,
+                        friday_hours: time.friday_hours || 0,
+                        total: time.total || 0,
+                        submitted: time.submitted
+                })
+            }else{
+                this.setState({
+                    monday_hours:  0,
+                    tuesday_hours: 0,
+                    wednesday_hours: 0,
+                    thursday_hours: 0,
+                    friday_hours: 0,
+                    total: 0,
+                    submitted: 0
+                })
+            }
+        }
+    }
 
     inputHours = (event, propertyName) => {
         // console.log('in inputHours', event.target.value);
@@ -68,9 +81,9 @@ class AddTime extends Component {
 
     // posts the information to the database
     handleSubmit = () => {
-        console.log('in handleSubmit');
+        console.log('in handleSubmit', parseFloat(this.state.monday_hours));
         this.setState({
-            ...this.state.submitted,
+            ...this.state,
             submitted: true
         });
         if (this.state.submitted === true) {
@@ -86,6 +99,7 @@ class AddTime extends Component {
                 confirmButtonText: 'Yes'
               }).then((result) => {
                 if (result.value) {
+                    console.log('CONSOJDFOSDF', this.state);
                     this.props.dispatch({
                         type: 'ADD_TIME', 
                         payload: {
@@ -95,8 +109,8 @@ class AddTime extends Component {
                             wednesday: this.state.daysWorked[2],
                             thursday: this.state.daysWorked[3],
                             friday: this.state.daysWorked[4],
-                            monday_hours: parseFloat(this.state.monday_hours),
-                            tuesday_hours: parseFloat(this.state.tuesday_hours),
+                            monday_hours: 8,
+                            tuesday_hours: this.state.tuesday_hours,
                             wednesday_hours: parseFloat(this.state.wednesday_hours),
                             thursday_hours: parseFloat(this.state.thursday_hours),
                             friday_hours: parseFloat(this.state.friday_hours),
@@ -105,6 +119,10 @@ class AddTime extends Component {
                             is_approved: this.state.is_approved,
                             deny_request: this.state.deny_request
                         }
+                        
+                    });
+                    this.props.dispatch({
+                        type: 'CLEAR_TIME',
                     });
                   Swal.fire(
                     'Success',
@@ -113,35 +131,11 @@ class AddTime extends Component {
                   )
                 }
               })
+
         }
         
         this.calculateHours();
         console.log(this.state.submitted)
-    }
-
-    handleSave = () => {
-        this.setState({
-            ...this.state.submitted,
-            submitted: true
-        });
-        this.props.dispatch({
-            type: 'ADD_TIME_TO_REDUX', 
-            payload: [{
-                employee_id: this.props.user.id,
-                monday: this.state.daysWorked[0],
-                tuesday: this.state.daysWorked[1],
-                wednesday: this.state.daysWorked[2],
-                thursday: this.state.daysWorked[3],
-                friday: this.state.daysWorked[4],
-                monday_hours: parseFloat(this.state.monday_hours),
-                tuesday_hours: parseFloat(this.state.tuesday_hours),
-                wednesday_hours: parseFloat(this.state.wednesday_hours),
-                thursday_hours: parseFloat(this.state.thursday_hours),
-                friday_hours: parseFloat(this.state.friday_hours),
-                submitted: this.state.submitted
-            }]
-        })
-        this.calculateHours();
     }
 
     setDates = () => {
@@ -163,6 +157,7 @@ class AddTime extends Component {
             console.log('SET DATES CONSOLE', this.state.daysWorked, begin);
         }
         this.setState({state: this.state})
+        // get request
     }
 
     calculateHours = () => {
@@ -211,11 +206,8 @@ class AddTime extends Component {
                         </tr>
                     </tbody>
                 </table>
-                                <p>{JSON.stringify(this.props.timesheet)}</p>
-                                <p>{JSON.stringify(this.props.timesheet.monday_hours)}</p>
-                                <p>{JSON.stringify(this.props.addTimeToRedux)}</p>
+                                {/* <p>{JSON.stringify(this.props.timesheet)}</p> */}
                 <button>Cancel</button>
-                <button onClick={this.handleSave}>Save</button>
                 <button onClick={this.handleSubmit}>Submit</button>
                 <div>Total Hours: {this.state.total} </div>
             </div>
@@ -226,7 +218,6 @@ class AddTime extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     timesheet: state.timesheet,
-    addTimeToRedux: state.addTimeToRedux
   });
 
 export default connect(mapStateToProps) (AddTime);

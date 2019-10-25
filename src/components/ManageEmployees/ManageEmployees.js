@@ -26,21 +26,12 @@ class ManageEmployees extends Component {
     // display employee details
     componentDidMount() {
         this.getProfile();
-        this.getUsernames();
     }
 
     // send dispatch to the FETCH_EMPLOYEE_DETAILS from saga
     getProfile = () => {
         this.props.dispatch({
             type: 'FETCH_EMPLOYEE_DETAILS'
-        })
-        console.log(this.props.empDetail)
-    }
-
-    getUsernames = () => {
-        this.props.dispatch({
-            type: 'FETCH_EMPLOYEE_USERNAMES',
-            payload: this.props.match.params.id
         })
         console.log(this.props.empDetail)
     }

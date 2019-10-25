@@ -4,13 +4,13 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // GET NOTIFICATIONS
-router.get('/', rejectUnauthenticated, (req, res) => {
-   const queryText = `SELECT "user".id, "user".first_name, "user".last_name, "hours".monday, "hours".is_approved, "hours".deny_request, "hours".id FROM "hours"
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+   const queryText = `SELECT *, "user".first_name, "user".last_name FROM "hours"
    JOIN "user" ON "user".id = "hours".employee_id
-   WHERE "hours".is_approved = false`;
-   pool.query(queryText)
+   WHERE "hours".id = $1`;
+   pool.query(queryText, [req.params.id])
    .then( (result) => {
-       console.log('Notifications GET ROUTER', result.rows);
+       console.log('-- Review GET ROUTER', result.rows);
        res.send(result.rows);
    })
    .catch( (error) => {
