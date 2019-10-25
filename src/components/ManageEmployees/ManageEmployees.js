@@ -1,6 +1,26 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+const styles = theme => ({
+    root: {
+      width: '100%',
+      marginTop: theme.spacing(1),
+      overflowX: 'auto',
+    },
+    table: {
+      minWidth: 700,
+    },
+  });
+
 class ManageEmployees extends Component {
 
     // display employee details
@@ -47,49 +67,53 @@ class ManageEmployees extends Component {
 
     render() {
 
+        const { classes } = this.props;
+
         // loop through the profile props to retrieve the the weekdays
         const employeeList = this.props.empDetail.map( (employee) => {
             return (  
-                <tr key={employee.id}>  
-                    <td>{employee.username}</td>
-                    <td>{employee.id}</td>
-                    <td>{employee.first_name}</td>
-                    <td>{employee.last_name}</td>
-                    <td>{employee.email}</td>
-                    <td>{employee.street}</td>
-                    <td>{employee.city}</td>
-                    <td>{employee.state}</td>
-                    <td>{employee.zipcode}</td>
-                    <td>{employee.phone}</td>
-                    <td><button onClick={() => {this.handleEdit(employee)} }>Edit</button></td>
-                    <td><button onClick={() => {this.handleDelete(employee)} }>Delete</button></td>
-                </tr>
+                <TableRow key={employee.id}>  
+                    <TableCell align="center">{employee.username}</TableCell>
+                    <TableCell align="center">{employee.id}</TableCell>
+                    <TableCell align="center">{employee.first_name}</TableCell>
+                    <TableCell align="center">{employee.last_name}</TableCell>
+                    <TableCell align="center">{employee.email}</TableCell>
+                    <TableCell align="center">{employee.street}</TableCell>
+                    <TableCell align="center">{employee.city}</TableCell>
+                    <TableCell align="center">{employee.state}</TableCell>
+                    <TableCell align="center">{employee.zipcode}</TableCell>
+                    <TableCell align="center">{employee.phone}</TableCell>
+                    <TableCell align="center"><button onClick={() => {this.handleEdit(employee)} }>Edit</button></TableCell>
+                    <TableCell align="center"><button onClick={() => {this.handleDelete(employee)} }>Delete</button></TableCell>
+                </TableRow>
             )
         })
 
         return (
             <div>
-                <div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Username</th>
-                                <th>User ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Street</th>
-                                <th>City</th>
-                                <th>State</th>
-                                <th>Zipcode</th>
-                                <th>Phone</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
+                <Paper className={classes.root}>
+                    <Table className={classes.table}>
+                        <TableHead>
+                        <TableRow>
+                            <TableCell align="center">Username</TableCell>
+                            <TableCell align="center">User ID</TableCell>
+                            <TableCell align="center">First Name</TableCell>
+                            <TableCell align="center">Last Name</TableCell>
+                            <TableCell align="center">Email</TableCell>
+                            <TableCell align="center">Street</TableCell>
+                            <TableCell align="center">City</TableCell>
+                            <TableCell align="center">State</TableCell>
+                            <TableCell align="center">Zipcode</TableCell>
+                            <TableCell align="center">Phone</TableCell>
+                            <TableCell align="center">Edit</TableCell>
+                            <TableCell align="center">Delete</TableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
                             {employeeList}
-                        </tbody>
-                    </table>
-                </div>
+                        </TableBody>
+                    </Table>
+                </Paper>
                 <div>
                     <button onClick={this.handleAddEmp}>Add Employee</button>
                 </div>
@@ -102,4 +126,8 @@ const mapStateToProps = state => ({
     empDetail: state.empDetail,
 });
 
-export default connect(mapStateToProps) (ManageEmployees);
+ManageEmployees.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
+export default withStyles(styles) (connect(mapStateToProps) (ManageEmployees));
