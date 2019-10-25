@@ -14,8 +14,22 @@ function* fetchNotification() {
   }
 }
 
+// fetches employee details
+function* getReviewTimesheet(action) {
+    try {
+      const response = yield axios.get(`/reivew/${action.payload}`);
+      yield put({ 
+        type: 'SET_REVIEW_TIMESHEET', 
+        payload: response.data 
+      });
+    } catch (error) {
+      console.log('-- fetchEmpDetails getSaga request failed', error);
+    }
+  }
+
 function* notificationSaga() {
   yield takeLatest('FETCH_NOTIFICATION_ADMIN', fetchNotification);
+  yield takeLatest('FETCH_TIMESHEET_REVIEW', getReviewTimesheet);
 }
 
 export default notificationSaga;

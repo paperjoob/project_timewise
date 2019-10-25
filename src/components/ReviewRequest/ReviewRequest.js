@@ -3,6 +3,18 @@ import {connect} from 'react-redux';
 
 class ReviewRequest extends Component {
 
+    componentDidMount() {
+        this.getReviewTime();
+    }
+
+    getReviewTime = () => {
+        this.props.dispatch({
+            type: 'FETCH_TIMESHEET_REVIEW',
+            payload: this.props.match.params.id
+        })
+        console.log('get Review TIME', this.props.review)
+    }
+
     render() {
 
         return (
@@ -14,8 +26,8 @@ class ReviewRequest extends Component {
     }
 }
 
-const mapStateToProps = (reduxState) => ({
-    reduxState
+const mapStateToProps = state => ({
+    review: state.review
   });
 
 export default connect(mapStateToProps) (ReviewRequest);

@@ -17,8 +17,8 @@ class Notification extends Component {
     console.log('in GET NOTIFICATIONS', this.props.adminNotification)
   }
 
-  handleReview = () => {
-    this.props.history.push('/review')
+  handleReview = (notify) => {
+    this.props.history.push(`/review/${notify.id}`);
   }
 
   render() {
@@ -26,7 +26,7 @@ class Notification extends Component {
     const notificationList = this.props.adminNotification.map( (notify) => {
       return (  
         <>
-        <li>{notify.first_name} {notify.last_name} has submitted the timesheet beginning on {notify.monday}. <button onClick={this.handleReview}>Review Request</button></li>
+        <li>{notify.first_name} {notify.last_name} has submitted the timesheet beginning on {notify.monday}. <button onClick={() => {this.handleReview(notify)} }>Review Request</button></li>
         </>
       )
   })
