@@ -17,10 +17,19 @@ class ReviewRequest extends Component {
 
     render() {
 
+        const timeDetails = this.props.review.map( (time) => {
+            return (  
+                <li>{time.first_name}</li>
+            )
+        })
+
         return (
 
             <div>
                 <p>Hi from Review Request</p>
+                <ul>
+                    {timeDetails}
+                </ul>
             </div>
         )
     }

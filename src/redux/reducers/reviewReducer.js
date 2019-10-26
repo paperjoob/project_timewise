@@ -2,8 +2,6 @@ const reviewReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_REVIEW_TIMESHEET':
         return action.payload;
-    //   case 'UNSET_USER':
-    //     return {};
       default:
         return state;
     }

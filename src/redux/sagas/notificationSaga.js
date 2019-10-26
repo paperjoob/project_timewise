@@ -17,7 +17,7 @@ function* fetchNotification() {
 // fetches employee details
 function* getReviewTimesheet(action) {
     try {
-      const response = yield axios.get(`/reivew/${action.payload}`);
+      const response = yield axios.get(`/review/${action.payload}`);
       yield put({ 
         type: 'SET_REVIEW_TIMESHEET', 
         payload: response.data 
