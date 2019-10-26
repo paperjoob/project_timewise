@@ -19,7 +19,16 @@ class ReviewRequest extends Component {
 
         const timeDetails = this.props.review.map( (time) => {
             return (  
-                <li>{time.first_name}</li>
+                <>
+                <li>Employee Name: {time.first_name} {time.last_name}</li>
+                <li>Employee ID: {time.id}</li>
+                <li>{time.monday} : {time.monday_hours}</li>
+                <li>{time.tuesday} : {time.tuesday_hours}</li>
+                <li>{time.wednesday} : {time.wednesday_hours}</li>
+                <li>{time.thursday} : {time.thursday_hours}</li>
+                <li>{time.friday} : {time.friday_hours}</li>
+                <li>Total Hours: {time.total}</li>
+                </>
             )
         })
 
