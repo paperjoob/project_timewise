@@ -61,7 +61,7 @@ class UserPage extends Component {
     return (
       <div>
         <h1 id="welcome">
-          Welcome, { this.props.user.username }!
+          Welcome, { this.props.user.first_name }!
         </h1>
         <p>Employee ID: {this.props.user.id}</p>
           <Notification history={this.props.history}/>

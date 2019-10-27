@@ -27,9 +27,21 @@ function* getReviewTimesheet(action) {
     }
   }
 
+  // put router to update the status of the time request
+  function* updateRequest(action) {
+    try {
+      const response = yield axios.put(`/review/:id`, action.payload);
+      console.log('in UPDATE REQUEST', response)
+    } catch (error) {
+      console.log('Error while updating time request', error);
+      
+    }
+  }
+
 function* notificationSaga() {
   yield takeLatest('FETCH_NOTIFICATION_ADMIN', fetchNotification);
   yield takeLatest('FETCH_TIMESHEET_REVIEW', getReviewTimesheet);
+  yield takeLatest('UPDATE_REQUEST', updateRequest);
 }
 
 export default notificationSaga;

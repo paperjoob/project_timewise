@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 class ReviewRequest extends Component {
 
     state = {
-        is_approved: false,
-        deny_request: false
+        is_approved: '',
+        deny_request: ''
     }
 
     componentDidMount() {
@@ -28,6 +28,8 @@ class ReviewRequest extends Component {
             is_approved: true
         });
         console.log('HANDLE APPROVE', this.state.is_approved)
+        this.props.dispatch({ type: 'UPDATE_REQUEST', payload: this.state.is_approved });
+        this.getReviewTime();
     }
 
     render() {
@@ -56,7 +58,7 @@ class ReviewRequest extends Component {
         return (
 
             <div>
-                <p>Hi from Review Request</p>
+                <h1>Review</h1>
                 <ul>
                     {timeDetails}
                 </ul>

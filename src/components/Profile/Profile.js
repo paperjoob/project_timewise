@@ -14,8 +14,8 @@ const styles = theme => ({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 'auto',
-        maxWidth: 900,
-        background: '#eeeeee'
+        maxWidth: 1150,
+        background: '#eeeeee',
     },
     container: {
         display: 'flex',
@@ -34,7 +34,7 @@ const styles = theme => ({
 class Profile extends Component {
 
     state = {
-        editProfile: false,
+        // editProfile: false,
         details: {
             first_name: '',
             last_name: '',
@@ -58,6 +58,26 @@ class Profile extends Component {
         })
     }
 
+    componentDidUpdate = (prevProps) => {
+        if (this.props.profile !== prevProps.profile) {
+            console.log('in DIDUPDATE',this.props.profile)
+            let edit = this.props.profile[0]
+            this.setState({
+                details: {
+                    first_name: edit.first_name,
+                    last_name: edit.last_name,
+                    email: edit.email,
+                    street: edit.street,
+                    city: edit.city,
+                    state: edit.state,
+                    zipcode: edit.zipcode,
+                    phone: edit.phone,
+                    id: this.props.match.params.id
+                }
+            })
+        }
+    }
+
     // toggle the editProfile option to either true or false,
     // when clicked
     toggleEditProfile = () => {
@@ -65,6 +85,16 @@ class Profile extends Component {
             editProfile: !this.state.editProfile
         })
         console.log('in TOGGLE')
+    }
+
+    handleChange = (event, propertyName) => {
+        console.log(event.target.value);
+        this.setState({
+            details: {
+                ...this.state.details,
+                [propertyName]: event.target.value
+            }
+        })
     }
 
     render() {
@@ -75,13 +105,13 @@ class Profile extends Component {
         const profileList = this.props.profile.map( (profileData) => {
             return (  
                 <>
-                            <td>{profileData.first_name}</td>
-                            <td>{profileData.last_name}</td>
-                            <td>{profileData.email}</td>
-                            <td>{profileData.street}</td>
-                            <td>{profileData.city}</td>
-                            <td>{profileData.zipcode}</td>
-                            <td>{profileData.phone}</td>
+                    <td><input onChange={(event) => {this.handleChange(event, 'first_name')}} className='profileInput' value={this.state.details.first_name}></input></td>
+                    <td><input onChange={(event) => {this.handleChange(event, 'last_name')}} className='profileInput' value={this.state.details.last_name}></input></td>
+                    <td><input onChange={(event) => {this.handleChange(event, 'email')}} className='profileInput' value={this.state.details.email}></input></td>
+                    <td><input onChange={(event) => {this.handleChange(event, 'street')}} className='profileInput' value={this.state.details.street}></input></td>
+                    <td><input onChange={(event) => {this.handleChange(event, 'city')}} className='profileInput' value={this.state.details.city}></input></td>
+                    <td><input onChange={(event) => {this.handleChange(event, 'zipcode')}} className='profileInput' value={this.state.details.zipcode}></input></td>
+                    <td><input onChange={(event) => {this.handleChange(event, 'phone')}} className='profileInput' value={this.state.details.phone}></input></td>
                 </>
             )
         })
@@ -118,8 +148,8 @@ class Profile extends Component {
                             }
                         </Typography>
                     </CardContent>  
+                    <EditButton className='editButton' toggleEditProfile={this.toggleEditProfile}/>
                 </Card>
-                <EditButton toggleEditProfile={this.toggleEditProfile}/>
                 </div>
             </div>
         )
@@ -135,115 +165,3 @@ Profile.propTypes = {
 };
 
 export default withStyles(styles) (connect(mapStateToProps) (Profile));
-
-
-
-
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import EditButton from '../elements/EditButton';
-
-// import './Profile.css'
-
-// class Profile extends Component {
-
-//     state = {
-//         editProfile: false,
-//         details: {
-//             first_name: '',
-//             last_name: '',
-//             email: '',
-//             street: '',
-//             city: '',
-//             zipcode: '',
-//             phone: ''
-//         }
-//     }
-
-//     // display profile details by calling the getProfile function
-//     componentDidMount() {
-//         this.getProfile();
-//     }
-
-//     // send dispatch to the FETCH_PROFILE profileSaga
-//     getProfile = () => {
-//         this.props.dispatch({
-//             type: 'FETCH_PROFILE'
-//         })
-//     }
-
-//     // toggle the editProfile option to either true or false,
-//     // when clicked
-//     toggleEditProfile = () => {
-//         this.setState({
-//             editProfile: !this.state.editProfile
-//         })
-//         console.log('in TOGGLE')
-//     }
-
-//     render() {
-
-//         // loop through the profile props to retrieve the details from user_info database
-//         const profileList = this.props.profile.map( (profileData) => {
-//             return ( 
-//                 <>
-//                 <tr>
-//                     <th>First Name</th>
-//                     <td>{profileData.first_name}</td>
-//                 </tr>
-//                 <tr>
-//                     <th>Last Name</th>
-//                     <td>{profileData.last_name}</td>
-//                 </tr>   
-//                 <tr>
-//                     <th>Email</th>
-//                     <td>{profileData.email}</td>
-//                 </tr>
-//                 <tr>
-//                     <th>Street</th>
-//                     <td>{profileData.street}</td>
-//                 </tr>
-//                 <tr>
-//                     <th>City</th>
-//                     <td>{profileData.city}</td>
-//                 </tr>     
-//                 <tr>
-//                     <th>State</th>
-//                     <td>{profileData.state}</td>
-//                 </tr>   
-//                 <tr>
-//                     <th>Zipcode</th>
-//                     <td>{profileData.zipcode}</td>
-//                 </tr>  
-//                 <tr>
-//                     <th>Phone</th>
-//                     <td>{profileData.phone}</td>
-//                 </tr>  
-//                 <tr>
-//                     <th>Employee ID</th>
-//                     <td>{profileData.user_login_id}</td>
-//                 </tr>  
-//                 </> 
-//             )
-//         })
-
-//         return (
-//             <div>
-//                 <table className="profileTable" >
-//                     <tbody>
-//                         {profileList}
-//                     </tbody>
-//                 </table>
-//                 <div>
-//                     <EditButton toggleEditProfile={this.toggleEditProfile}/>
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
-
-// const mapStateToProps = state => ({
-//     profile: state.profile,
-//   });
-
-// export default connect(mapStateToProps) (Profile);

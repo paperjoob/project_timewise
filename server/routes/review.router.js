@@ -19,11 +19,20 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
    })
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    const updatedRequest = req.body;
+    const queryText = `UPDATE "hours" SET "is_approved" = $1 WHERE "id" = $2;`;
+    const queryValues = [
+        updatedRequest.is_approved,
+        updatedRequest.id
+        ];
 
-});
+    pool.query(queryText, queryValues)
+      .then(() => { res.sendStatus(200); })
+      .catch((err) => {
+        console.log('-- Review Router Error for PUT --', err);
+        res.sendStatus(500);
+      });
+  });
 
 module.exports = router;

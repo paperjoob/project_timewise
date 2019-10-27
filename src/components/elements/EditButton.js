@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import { Edit } from '@material-ui/icons';
+import { Save } from '@material-ui/icons';
 
 const styles = theme => ({
   button: {
@@ -22,8 +22,8 @@ class EditButton extends Component {
         return (
             <div>
               <Button onClick={this.props.toggleEditProfile} variant="contained" color="default" className={classes.button}>
-                Edit
-                <Edit className={classes.rightIcon} />
+                Save
+                <Save className={classes.rightIcon} />
               </Button>
             </div>
           );

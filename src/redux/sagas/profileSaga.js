@@ -5,10 +5,6 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* fetchProfile() {
   try {
     const response = yield axios.get('/profile');
-
-    // now that the session has given us a user object
-    // with an id and username set the client-side user object to let
-    // the client-side code know the user is logged in
     yield put({ 
       type: 'SET_PROFILE', 
       payload: response.data 
