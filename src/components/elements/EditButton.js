@@ -21,7 +21,7 @@ class EditButton extends Component {
         const { classes } = this.props;
         return (
             <div>
-              <Button onClick={this.props.toggleEditProfile} variant="contained" color="default" className={classes.button}>
+              <Button onClick={this.props.saveChanges} variant="contained" color="default" className={classes.button}>
                 Save
                 <Save className={classes.rightIcon} />
               </Button>

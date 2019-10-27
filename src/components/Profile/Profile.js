@@ -34,7 +34,6 @@ const styles = theme => ({
 class Profile extends Component {
 
     state = {
-        // editProfile: false,
         details: {
             first_name: '',
             last_name: '',
@@ -80,10 +79,7 @@ class Profile extends Component {
 
     // toggle the editProfile option to either true or false,
     // when clicked
-    toggleEditProfile = () => {
-        this.setState({
-            editProfile: !this.state.editProfile
-        })
+    saveChanges = () => {
         console.log('in TOGGLE')
     }
 
@@ -148,7 +144,7 @@ class Profile extends Component {
                             }
                         </Typography>
                     </CardContent>  
-                    <EditButton className='editButton' toggleEditProfile={this.toggleEditProfile}/>
+                    <EditButton saveChanges={this.saveChanges}/>
                 </Card>
                 </div>
             </div>
