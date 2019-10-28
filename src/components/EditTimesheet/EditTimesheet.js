@@ -56,21 +56,33 @@ class EditTimesheet extends Component {
         this.props.history.push('/home')
     }
 
+    handleChange = (event) => {
+        console.log(event.target.value);
+    }
+
     render() {
 
         const timeDetails = this.props.userNotification.map( (time) => {
             return (  
                 <>
-                <li>Name: {time.first_name} {time.last_name}</li>
-                <li>Employee ID: {time.id}</li>
-                <li>{time.monday} : {time.monday_hours}</li>
-                <li>{time.tuesday} : {time.tuesday_hours}</li>
-                <li>{time.wednesday} : {time.wednesday_hours}</li>
-                <li>{time.thursday} : {time.thursday_hours}</li>
-                <li>{time.friday} : {time.friday_hours}</li>
-                <li>Approved: {time.is_approved.toString()}</li>
-                <li>Deny Request: {time.deny_request.toString()}</li>
-                <li>Total Hours: {time.total}</li>
+                <p>Name: {time.first_name} {time.last_name}</p>
+                <p>Employee ID: {time.id}</p>
+                <tbody>
+                    <tr>
+                        <td>{time.monday}</td>
+                        <td>{time.tuesday}</td>
+                        <td>{time.wednesday}</td>
+                        <td>{time.thursday}</td>
+                        <td>{time.friday}</td>
+                    </tr>
+                    <tr>  
+                        <td><input defaultValue={time.monday_hours} onChange={this.handleChange}></input></td>
+                        <td><input defaultValue={time.tuesday_hours} onChange={this.handleChange}></input></td>
+                        <td>{time.wednesday_hours}</td>
+                        <td>{time.thursday_hours}</td>
+                        <td>{time.friday_hours}</td>
+                    </tr>
+                </tbody>
                 <br />
                 <textarea placeholder={time.comments}></textarea>
                 <br />
@@ -84,9 +96,7 @@ class EditTimesheet extends Component {
 
             <div>
                 <h1>Edit Timesheet</h1>
-                <ul>
                     {timeDetails}
-                </ul>
                 <p>{JSON.stringify(this.props.userNotification)}</p>
             </div>
         )
