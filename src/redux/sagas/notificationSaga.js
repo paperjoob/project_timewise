@@ -14,7 +14,7 @@ function* fetchNotification() {
   }
 }
 
-// fetches employee details
+// fetches an individual employee timesheet data
 function* getReviewTimesheet(action) {
     try {
       const response = yield axios.get(`/review/${action.payload}`);
@@ -53,11 +53,25 @@ function* grabNotificationUser() {
     }
   }
 
+  // fetches the own employees' timesheet data
+function* getEditUser(action) {
+    try {
+      const response = yield axios.get(`/review/${action.payload}`);
+      yield put({ 
+        type: 'SET_EDIT_USER', 
+        payload: response.data 
+      });
+    } catch (error) {
+      console.log('-- fetchEmpDetails getSaga request failed', error);
+    }
+  }
+
 function* notificationSaga() {
   yield takeLatest('FETCH_NOTIFICATION_ADMIN', fetchNotification);
   yield takeLatest('FETCH_TIMESHEET_REVIEW', getReviewTimesheet);
   yield takeLatest('UPDATE_REQUEST', updateRequest);
   yield takeLatest('GRAB_NOTIFICIATION_USER', grabNotificationUser);
+  yield takeLatest('GRAB_EDIT_USER', getEditUser);
 }
 
 export default notificationSaga;

@@ -206,10 +206,10 @@ class AddTime extends Component {
                         </tr>
                     </tbody>
                 </table>
+                <div>Total Hours: {this.state.total} </div>
                                 {/* <p>{JSON.stringify(this.props.timesheet)}</p> */}
                 <button onClick={this.handleCancel}>Cancel</button>
                 <button onClick={this.handleSubmit}>Submit</button>
-                <div>Total Hours: {this.state.total} </div>
             </div>
         )
     }
@@ -218,6 +218,7 @@ class AddTime extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     timesheet: state.timesheet,
+    userNotification: state.userNotification
   });
 
 export default connect(mapStateToProps) (AddTime);

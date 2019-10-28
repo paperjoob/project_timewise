@@ -26,6 +26,7 @@ import EditEmployeeDetails from '../EditEmployeeDetails/EditEmployeeDetails';
 import './App.css';
 import ReviewRequest from '../ReviewRequest/ReviewRequest';
 import TimeReportAdmin from '../TimeReportAdmin/TimeReportAdmin';
+import EditTimesheet from '../EditTimesheet/EditTimesheet';
 
 
 class App extends Component {
@@ -104,6 +105,11 @@ class App extends Component {
               exact
               path="/timesheetreport/admin"
               component={TimeReportAdmin}
+            />
+            <ProtectedRoute
+              exact
+              path="/edit/:id"
+              component={EditTimesheet}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

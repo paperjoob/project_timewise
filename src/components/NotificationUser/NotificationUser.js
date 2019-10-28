@@ -17,12 +17,18 @@ class NotificationUser extends Component {
     console.log('in GET NOTIFICATIONS', this.props.userNotification)
   }
 
+  // click on the edit button to edit the time submitted
+  handleEdit = (notify) => {
+      console.log('in handleEDIT');
+      this.props.history.push(`/edit/${notify.id}`)
+  }
+
   render() {
 
     const notificationList = this.props.userNotification.map( (notify) => {
       return (  
         <>
-        <li>{notify.first_name}, your timesheet has been denied for the week of {notify.monday}. Comment: {notify.comments} <button>Edit Timesheet</button></li>
+        <li>{notify.first_name}, please revise your timesheet for the week starting {notify.monday}. Comment: {notify.comments} <button onClick={() => {this.handleEdit(notify)} }>Edit Timesheet</button></li>
         </>
       )
   })
