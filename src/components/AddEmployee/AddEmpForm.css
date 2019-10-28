@@ -21,3 +21,22 @@
     cursor: pointer;
     margin-top: 20px;
 }
+
+.cancelButton {
+    background-color: crimson;
+    border-radius: 4px;
+    color: #f8f8f8;
+    min-height: 50px;
+    min-width: 100px;
+    outline:0;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.addButton:hover {
+    background-color: #008183;
+}
+
+.cancelButton:hover {
+    background-color: firebrick;
+}

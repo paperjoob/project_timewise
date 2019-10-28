@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
 import Swal from 'sweetalert2'
@@ -15,8 +13,8 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     width: 200,
     align: 'center'
   },
@@ -73,7 +71,6 @@ handleAdd = (event) => {
           )
         } 
     })
-    this.props.history.push('/manage')
 }
 
   handleInputChangeFor = propertyName => (event) => {
@@ -175,6 +172,13 @@ handleAdd = (event) => {
               onChange={this.handleInputChangeFor('phone')}
               margin="normal"
             />
+            <input
+              className="cancelButton"
+              type='text'
+              type='submit'
+              onClick ={this.handleBack}
+              value="Cancel"
+            />
             <input
               className="addButton"
               type="submit"
@@ -182,7 +186,6 @@ handleAdd = (event) => {
               value="Save"
             />
         </form>
-        <button onClick={this.handleBack}>Back</button>
 {/*         <p>{JSON.stringify(this.state)}</p> */}
       </div>
     );
