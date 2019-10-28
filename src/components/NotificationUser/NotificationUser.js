@@ -22,7 +22,7 @@ class NotificationUser extends Component {
     const notificationList = this.props.userNotification.map( (notify) => {
       return (  
         <>
-        <li>{notify.first_name}, your timesheet has been denied for the week of {notify.monday}. Comment: {notify.comments}</li>
+        <li>{notify.first_name}, your timesheet has been denied for the week of {notify.monday}. Comment: {notify.comments} <button>Edit Timesheet</button></li>
         </>
       )
   })
