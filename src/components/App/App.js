@@ -100,7 +100,7 @@ class App extends Component {
               path="/review/:id"
               component={ReviewRequest}
             />
-                        <ProtectedRoute
+            <ProtectedRoute
               exact
               path="/timesheetreport/admin"
               component={TimeReportAdmin}

@@ -99,7 +99,7 @@ handleAdd = (event) => {
           </h2>
         )}
         <h1 className='addh1'>ADD NEW EMPLOYEE</h1>
-        <form className={classes.container} className='addEmpForm' onSubmit={this.handleAdd} noValidate autoComplete="off">
+        <form className='addEmpForm' onSubmit={this.handleAdd} noValidate autoComplete="off">
             <TextField
               id="username"
               label="Username"
@@ -174,10 +174,9 @@ handleAdd = (event) => {
             />
             <input
               className="cancelButton"
-              type='text'
               type='submit'
               onClick ={this.handleBack}
-              value="Cancel"
+              value="Back"
             />
             <input
               className="addButton"

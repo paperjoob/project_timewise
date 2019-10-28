@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import './UserPage.css';
 import Notification from '../Notification/Notification';
+import NotificationUser from '../NotificationUser/NotificationUser';
 
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
@@ -66,19 +67,23 @@ class UserPage extends Component {
             <td><input defaultValue={time.wednesday_hours} className="boardInput"></input></td>
             <td><input defaultValue={time.thursday_hours} className="boardInput"></input></td>
             <td><input defaultValue={time.friday_hours} className="boardInput"></input></td>
-            <td>Total Hours: {time.total}</td>
+            <td>Total: {time.total}</td>
           </tr>
       )
   })
 
     return (
       <div>
-        <h1 id="welcome">
+        <h1 className="welcome">
           Welcome, { this.props.user.first_name }!
         </h1>
-        <p>Employee ID: {this.props.user.id}</p>
+        <p className='empID'>Employee ID: {this.props.user.id}</p>
           {this.props.user.admin === true ?
             <Notification history={this.props.history}/>
+            : <div></div>
+          }
+          {this.props.user.admin === false ?
+            <NotificationUser history={this.props.history}/>
             : <div></div>
           }
         <div className="boardDiv">

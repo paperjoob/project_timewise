@@ -8,7 +8,8 @@ import hours from './hoursReducer';
 import timesheet from './timesheetReducer';
 import adminNotification from './adminNotification';
 import review from './reviewReducer';
-import adminTime from './adminTimeReducer'
+import adminTime from './adminTimeReducer';
+import userNotification from './userNotification';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,9 +25,10 @@ const rootReducer = combineReducers({
   hours, // contains employees hours worked
   empDetail, // contains employee details
   timesheet, // timesheet
-  adminNotification,
+  adminNotification, // grab notifications for admins
   review, // contains employee timesheets for review by admin 
-  adminTime
+  adminTime,
+  userNotification, // grab user Notifications
 });
 
 export default rootReducer;

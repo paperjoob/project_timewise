@@ -38,10 +38,26 @@ function* getReviewTimesheet(action) {
     }
   }
 
+//////////////// USER NOTIFICATIONS ///////////////
+
+// worker Saga: will be fired on "SET NOTIFICATION USER" -- USERS ONLY
+function* grabNotificationUser() {
+    try {
+      const response = yield axios.get('/notification/user');
+      yield put({ 
+        type: 'SET_NOTIFICATION_USER', 
+        payload: response.data 
+      });
+    } catch (error) {
+      console.log('--NOTIFICATION get request failed', error);
+    }
+  }
+
 function* notificationSaga() {
   yield takeLatest('FETCH_NOTIFICATION_ADMIN', fetchNotification);
   yield takeLatest('FETCH_TIMESHEET_REVIEW', getReviewTimesheet);
   yield takeLatest('UPDATE_REQUEST', updateRequest);
+  yield takeLatest('GRAB_NOTIFICIATION_USER', grabNotificationUser);
 }
 
 export default notificationSaga;

@@ -49,7 +49,11 @@ class ReviewRequest extends Component {
             }  
             this.getReviewTime(); 
         })
-        }
+    }
+
+    handleDeny = () => {
+        console.log('in handleDENY');
+    }
 
     render() {
 
@@ -64,12 +68,13 @@ class ReviewRequest extends Component {
                 <li>{time.thursday} : {time.thursday_hours}</li>
                 <li>{time.friday} : {time.friday_hours}</li>
                 <li>Approved: {time.is_approved.toString()}</li>
+                <li>Deny Request: {time.deny_request.toString()}</li>
                 <li>Total Hours: {time.total}</li>
                 <br />
                 <textarea></textarea>
                 <br />
                 <button onClick={this.handleApprove}>Approve</button>
-                <button>Deny</button>
+                <button onClick={this.handleDeny}>Deny</button>
                 </>
             )
         })

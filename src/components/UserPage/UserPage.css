@@ -12,7 +12,7 @@
 }
 
 .timeTable {
-    width: 450px;
+    width: 600px;
     border: 1px solid black;
     text-align: center;
     align-self: center;
@@ -23,12 +23,24 @@
     justify-content: center;
 }
 
+.welcome {
+    padding: 15px;
+}
+
+.empID {
+    padding-left: 15px;
+}
+
 h2 {
     text-align: center;
 }
 
 th {
     text-align: center;
+}
+
+td {
+    padding: 15px;
 }
 
 button {
