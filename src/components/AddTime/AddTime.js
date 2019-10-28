@@ -57,17 +57,18 @@ class AddTime extends Component {
                         total: time.total || 0,
                         submitted: time.submitted
                 })
-            }else{
-                this.setState({
-                    monday_hours:  0,
-                    tuesday_hours: 0,
-                    wednesday_hours: 0,
-                    thursday_hours: 0,
-                    friday_hours: 0,
-                    total: 0,
-                    submitted: false
-                })
             }
+            // else{
+            //     this.setState({
+            //         monday_hours:  0,
+            //         tuesday_hours: 0,
+            //         wednesday_hours: 0,
+            //         thursday_hours: 0,
+            //         friday_hours: 0,
+            //         total: 0,
+            //         submitted: false
+            //     })
+            // }
         }
     }
 
@@ -86,6 +87,7 @@ class AddTime extends Component {
             ...this.state.submitted,
             submitted: true
         });
+        this.calculateHours();
         // if (this.state.submitted === true) {
         //     alert ('Your time for this week has already been submitted.');
         // } else {
@@ -131,7 +133,6 @@ class AddTime extends Component {
                 }
               })
         // }
-        this.calculateHours();
     }
 
     setDates = () => {
@@ -182,6 +183,8 @@ class AddTime extends Component {
         //         </tr>
         //     )
         // })
+
+        console.log('RENDER', this.state)
 
         return (
             <div>
