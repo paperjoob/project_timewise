@@ -1,0 +1,23 @@
+.addEmpForm {
+    background-color: #dbd5d5;
+    width: 300px;
+    height: 720px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 4px;
+}
+
+.addh1 {
+    text-align: center;
+}
+
+.addButton {
+    background-color: #00acb0;
+    border-radius: 4px;
+    color: #f8f8f8;
+    min-height: 50px;
+    min-width: 100px;
+    outline:0;
+    cursor: pointer;
+    margin-top: 20px;
+}

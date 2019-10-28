@@ -17,11 +17,29 @@ router.get('/', rejectUnauthenticated, (req, res) => {
    })
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
+    const updatedUser = req.body;
+    const queryText = `UPDATE "user" SET "first_name" = $1, "last_name" = $2, "email" = $3, "street" = $4, "city" = $5, "state" = $6, "zipcode" = $7, "phone" = $8 WHERE "id" = $9;`;
+    const queryValues = [
+        updatedUser.first_name,
+        updatedUser.last_name,
+        updatedUser.email,
+        updatedUser.street,
+        updatedUser.city,
+        updatedUser.state,
+        updatedUser.zipcode,
+        updatedUser.phone,
+        updatedUser.id
+    ];
 
-});
+    pool.query(queryText, queryValues)
+        .then(() => {res.sendStatus(200) 
+        console.log(queryValues) 
+        })
+        .catch((error) => {
+            console.log('Error putting UPDATE IN ROUTE', error);
+            res.sendStatus(500);
+        })
+}); // end PUT ROUTE
 
 module.exports = router;

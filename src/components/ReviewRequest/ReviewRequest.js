@@ -46,9 +46,9 @@ class ReviewRequest extends Component {
                 'Time has been approved.',
                 'success'
               )
-            }   
+            }  
+            this.getReviewTime(); 
         })
-        this.getReviewTime();
         }
 
     render() {
@@ -81,7 +81,7 @@ class ReviewRequest extends Component {
                 <ul>
                     {timeDetails}
                 </ul>
-                <p>{JSON.stringify(this.props.review)}</p>
+                {/* <p>{JSON.stringify(this.props.review)}</p> */}
             </div>
         )
     }

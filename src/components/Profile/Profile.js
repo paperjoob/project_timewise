@@ -7,6 +7,7 @@ import EditButton from '../elements/EditButton';
 import PropTypes from 'prop-types';
 
 import './Profile.css'
+import Swal from 'sweetalert2'
 
 const styles = theme => ({
     card: {
@@ -14,7 +15,7 @@ const styles = theme => ({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 'auto',
-        maxWidth: 1150,
+        maxWidth: 1300,
         background: '#eeeeee',
     },
     container: {
@@ -39,9 +40,11 @@ class Profile extends Component {
             last_name: '',
             email: '',
             street: '',
+            state: '',
             city: '',
             zipcode: '',
-            phone: ''
+            phone: '',
+            id: this.props.user.id
         }
     }
 
@@ -71,20 +74,39 @@ class Profile extends Component {
                     state: edit.state,
                     zipcode: edit.zipcode,
                     phone: edit.phone,
-                    id: this.props.match.params.id
+                    id: edit.id
                 }
             })
         }
     }
 
-    // toggle the editProfile option to either true or false,
-    // when clicked
+    // save changes made to profile
     saveChanges = () => {
-        console.log('in TOGGLE')
+        Swal.fire({
+            title: 'Are you sure you would like to make the following changes?',
+            text: "",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+          }).then((result) => {
+            if (result.value) {
+                this.props.dispatch({ 
+                    type: 'UPDATE_PROFILE', 
+                    payload: this.state.details
+                })
+              Swal.fire(
+                'Success!',
+                'Your changes have been saved.',
+                'success'
+              )
+            }
+          })
     }
 
+    // saves changes to the local state
     handleChange = (event, propertyName) => {
-        console.log(event.target.value);
         this.setState({
             details: {
                 ...this.state.details,
@@ -106,6 +128,7 @@ class Profile extends Component {
                     <td><input onChange={(event) => {this.handleChange(event, 'email')}} className='profileInput' value={this.state.details.email}></input></td>
                     <td><input onChange={(event) => {this.handleChange(event, 'street')}} className='profileInput' value={this.state.details.street}></input></td>
                     <td><input onChange={(event) => {this.handleChange(event, 'city')}} className='profileInput' value={this.state.details.city}></input></td>
+                    <td><input onChange={(event) => {this.handleChange(event, 'state')}} className='profileInput' value={this.state.details.state}></input></td>
                     <td><input onChange={(event) => {this.handleChange(event, 'zipcode')}} className='profileInput' value={this.state.details.zipcode}></input></td>
                     <td><input onChange={(event) => {this.handleChange(event, 'phone')}} className='profileInput' value={this.state.details.phone}></input></td>
                 </>
@@ -126,8 +149,9 @@ class Profile extends Component {
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
-                                <th>State</th>
+                                <th>Street</th>
                                 <th>City</th>
+                                <th>State</th>
                                 <th>Zipcode</th>
                                 <th>Phone</th>
                             </tr>
@@ -154,6 +178,7 @@ class Profile extends Component {
 
 const mapStateToProps = state => ({
     profile: state.profile,
+    user: state.user
 });
 
 Profile.propTypes = {
