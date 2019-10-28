@@ -22,28 +22,21 @@ class TimesheetReport extends Component {
             const weekList = this.props.timesheet.map( (time) => {
                 return (  
                     <>  
-                        <li>{time.monday}</li>
-                        <li>{time.tuesday}</li>
-                        <li>{time.wednesday}</li>
-                        <li>{time.thursday}</li>
-                        <li>{time.friday}</li>
-                        <li>{time.monday_hours}</li>
-                        <li>{time.tuesday_hours}</li>
-                        <li>{time.wednesday_hours}</li>
-                        <li>{time.thursday_hours}</li>
-                        <li>{time.friday_hours}</li>
+                        <li>{time.monday}: {time.monday_hours} hours</li>
+                        <li>{time.tuesday}: {time.tuesday_hours} hours</li>
+                        <li>{time.wednesday}: {time.wednesday_hours} hours</li>
+                        <li>{time.thursday}: {time.thursday_hours} hours</li>
+                        <li>{time.friday}: {time.friday_hours} hours</li>
                     </>
                 )
             })
         return (
             <div>
-                Hello from TimesheetReport
+                <h1>Timesheet Report</h1>
                 <ul>
                     {weekList}
                 </ul>
-
-
-                <p>{JSON.stringify(this.props.timesheet)}</p>
+                {/* <p>{JSON.stringify(this.props.timesheet)}</p> */}
             </div>
         )
     }

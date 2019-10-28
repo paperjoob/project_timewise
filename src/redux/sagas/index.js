@@ -8,6 +8,7 @@ import addEmployeeSaga from './addEmployeeSaga';
 import hoursSaga from './hoursSaga';
 import timesheetSaga from './timesheetSaga'
 import notificationSaga from './notificationSaga';
+import adminTimeSaga from './adminTimeSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     hoursSaga(),
     timesheetSaga(),
     notificationSaga(),
+    adminTimeSaga(),
   ]);
 }

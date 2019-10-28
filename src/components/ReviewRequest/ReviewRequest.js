@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import Swal from 'sweetalert2'
+
 class ReviewRequest extends Component {
 
     state = {
-        is_approved: '',
-        deny_request: ''
+        updateRequest: {
+            id: this.props.match.params.id
+        }
     }
 
     componentDidMount() {
@@ -21,16 +24,32 @@ class ReviewRequest extends Component {
         console.log('get Review TIME', this.props.review)
     }
 
-    // approve the request
+    // approve the request from false to true
     handleApprove = () => {
-        this.setState({
-            ...this.state.is_approved,
-            is_approved: true
-        });
-        console.log('HANDLE APPROVE', this.state.is_approved)
-        this.props.dispatch({ type: 'UPDATE_REQUEST', payload: this.state.is_approved });
+
+        Swal.fire({
+            title: 'Are the times entered correct?',
+            text: "",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((willAdd) => {
+            if (willAdd.value) {
+                this.props.dispatch({ 
+                    type: 'UPDATE_REQUEST', 
+                    payload: this.state.updateRequest
+                });
+              Swal.fire(
+                'Success!',
+                'Time has been approved.',
+                'success'
+              )
+            }   
+        })
         this.getReviewTime();
-    }
+        }
 
     render() {
 

@@ -39,11 +39,11 @@ function AppNavBar(props) {
                     <Toolbar>
                         <SideDrawer />
                         <Typography variant="h1" className={classes.title}>
-                            {props.user.username ?
-                                <div>Welcome, {props.user.username}!</div>
-                                :
+                            {/* {props.user.username ? */}
+                                {/* <div>Welcome, {props.user.username}!</div>
+                                : */}
                                 <div>TimeWise</div>
-                            }
+                            {/* } */}
 
                         </Typography>
                         <Button color="inherit" component={Link} to="/home">Home</Button>

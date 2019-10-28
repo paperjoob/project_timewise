@@ -21,14 +21,14 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     const updatedRequest = req.body;
-    const queryText = `UPDATE "hours" SET "is_approved" = $1 WHERE "id" = $2;`;
+    const queryText = `UPDATE "hours" SET "is_approved" = true WHERE "id" = $1;`;
     const queryValues = [
-        updatedRequest.is_approved,
         updatedRequest.id
         ];
-
     pool.query(queryText, queryValues)
-      .then(() => { res.sendStatus(200); })
+      .then(() => { res.sendStatus(200); 
+        console.log(queryValues)
+    })
       .catch((err) => {
         console.log('-- Review Router Error for PUT --', err);
         res.sendStatus(500);

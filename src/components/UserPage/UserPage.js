@@ -58,22 +58,37 @@ class UserPage extends Component {
 
   render() {
 
+    const timeDetails = this.props.timesheet.map( (time) => {
+      return (  
+          <tr key={time.id}>
+            <td><input defaultValue={time.monday_hours} className="boardInput"></input></td>
+            <td><input defaultValue={time.tuesday_hours} className="boardInput"></input></td>
+            <td><input defaultValue={time.wednesday_hours} className="boardInput"></input></td>
+            <td><input defaultValue={time.thursday_hours} className="boardInput"></input></td>
+            <td><input defaultValue={time.friday_hours} className="boardInput"></input></td>
+            <td>Total Hours: {time.total}</td>
+          </tr>
+      )
+  })
+
     return (
       <div>
         <h1 id="welcome">
           Welcome, { this.props.user.first_name }!
         </h1>
         <p>Employee ID: {this.props.user.id}</p>
-          <Notification history={this.props.history}/>
+          {this.props.user.admin === true ?
+            <Notification history={this.props.history}/>
+            : <div></div>
+          }
         <div className="boardDiv">
-        <h2>Time Board</h2>
+        <h2>Current Week</h2>
         <div>
-            <button onClick={this.handleAddTime}>Add Time</button>
         </div>
         <br />
+        <div className="tableDiv"> 
         <table className="timeTable">
             <tbody>
-                <tr><th>Current Week</th></tr>
                 <tr>
                     <td>MON <br/>{this.state.daysWorked[0]}</td>
                     <td>TUE <br/>{this.state.daysWorked[1]}</td>
@@ -81,20 +96,14 @@ class UserPage extends Component {
                     <td>THU <br/>{this.state.daysWorked[3]}</td>
                     <td>FRI <br/>{this.state.daysWorked[4]}</td>
                 </tr>
-                <tr>
-                    <td><input className="boardInput"></input></td>
-                    <td><input className="boardInput"></input></td>
-                    <td><input className="boardInput"></input></td>
-                    <td><input className="boardInput"></input></td>
-                    <td><input className="boardInput"></input></td>
-                </tr>
+                {timeDetails}
             </tbody>
         </table>
-        <div>
-            <p>Total Hours:</p>
-            <p>HOURS</p>
         </div>
+        <br />
+        <button onClick={this.handleAddTime}>Add Time</button>
         </div>
+            {/* <p>{JSON.stringify(this.props.timesheet)}</p> */}
       </div>
     )
   }
@@ -105,6 +114,7 @@ class UserPage extends Component {
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
   user: state.user,
+  timesheet: state.timesheet
 });
 
 // this allows us to use <App /> in index.js

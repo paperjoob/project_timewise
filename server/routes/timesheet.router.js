@@ -17,6 +17,21 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// GET ROUTE for ALL Timesheet - ADMIN
+router.get('/admin', rejectUnauthenticated, (req, res) => {
+    const queryText = `SELECT *, "user".first_name, "user".last_name FROM "hours"
+    JOIN "user" ON "user".id = "hours".employee_id;`;
+    pool.query(queryText)
+    .then( (result) => {
+        console.log('--Timesheet GET ROUTER--', result.rows);
+        res.send(result.rows);
+    })
+    .catch( (error) => {
+        console.log('Error retrieving profile data', error);
+        res.sendStatus(500);
+    })
+});
+
 /**
  * POST route template
  */

@@ -36,7 +36,7 @@ class AddTime extends Component {
         this.getWeek();
     }
 
-    // sends a dispatch to the Saga to FETCH_TIME
+    // sends a dispatch to the Saga to FETCH_TIME for timesheet hours
     getWeek = () => {
         this.props.dispatch({
             type: 'FETCH_TIME',
@@ -86,9 +86,9 @@ class AddTime extends Component {
             ...this.state.submitted,
             submitted: true
         });
-        if (this.state.submitted === true) {
-            alert ('Your time for this week has already been submitted.');
-        } else {
+        // if (this.state.submitted === true) {
+        //     alert ('Your time for this week has already been submitted.');
+        // } else {
             Swal.fire({
                 title: 'Are all of the information correct?',
                 text: "You will not be able to make any changes after submittal. Proceed?",
@@ -130,7 +130,7 @@ class AddTime extends Component {
                   )
                 }
               })
-        }
+        // }
         this.calculateHours();
     }
 
@@ -186,6 +186,7 @@ class AddTime extends Component {
         return (
             <div>
                 <h1>My Timecard</h1>
+                <h4>Please only submit your timesheet once per week.</h4>
                 <table >
                     <tbody>
                         <tr><th>Current Week</th></tr>
