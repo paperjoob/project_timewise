@@ -55,7 +55,12 @@ class ReviewRequest extends Component {
 
     handleDeny = () => {
         console.log('in handleDENY');
-        this.props.dispatch({
+
+        Swal.fire({
+            type: 'info',
+            title: 'User will be notified of status change.',
+          })
+          this.props.dispatch({
             type: 'DENY_REQUEST',
             payload: this.state.updateRequest
         })
