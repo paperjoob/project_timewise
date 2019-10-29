@@ -16,6 +16,7 @@ const manageEmployeeRouter = require('./routes/manageEmployee.router');
 const timesheetRouter = require('./routes/timesheet.router');
 const notificationRouter = require('./routes/notifications.router');
 const reviewRouter = require('./routes/review.router');
+const editRouter = require('./routes/editTime.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -36,6 +37,7 @@ app.use('/manage', manageEmployeeRouter);
 app.use('/timesheetreport', timesheetRouter);
 app.use('/notification', notificationRouter);
 app.use('/review', reviewRouter);
+app.use('/edit', editRouter);
 
 // Serve static files
 app.use(express.static('build'));

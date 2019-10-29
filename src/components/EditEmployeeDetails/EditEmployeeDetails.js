@@ -49,7 +49,7 @@ class AddEmployeeDetails extends Component {
             type: 'FETCH_EMP_DETAILS',
             payload: this.props.match.params.id
         })
-        console.log(this.props.empDetail)
+        console.log('in GetProfile ---', this.props.empDetail)
     }
 
     handleChange = (event, propertyName) => {

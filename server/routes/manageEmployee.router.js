@@ -90,7 +90,6 @@ router.put('/', (req, res) => {
         updatedUser.phone,
         updatedUser.id
     ];
-
     pool.query(queryText, queryValues)
         .then(() => {res.sendStatus(200)})
         .catch((error) => {

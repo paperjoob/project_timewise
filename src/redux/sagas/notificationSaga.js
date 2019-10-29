@@ -40,7 +40,8 @@ function* getReviewTimesheet(action) {
 
 //////////////// USER NOTIFICATIONS ///////////////
 
-// worker Saga: will be fired on "SET NOTIFICATION USER" -- USERS ONLY
+// worker Saga: will be fired on "SET NOTIFICATION USER" -- USERS ONLY 
+// if deny_request is false, do this
 function* grabNotificationUser() {
     try {
       const response = yield axios.get('/notification/user');
@@ -56,7 +57,7 @@ function* grabNotificationUser() {
   // fetches the own employees' timesheet data
 function* getEditUser(action) {
     try {
-      const response = yield axios.get(`/review/${action.payload}`);
+      const response = yield axios.get(`/edit/${action.payload}`);
       yield put({ 
         type: 'SET_EDIT_USER', 
         payload: response.data 
@@ -66,12 +67,24 @@ function* getEditUser(action) {
     }
   }
 
+   // put router to update the status of the time request
+   function* updateHours(action) {
+    try {
+      const response = yield axios.put(`/edit/:id`, action.payload);
+      console.log('in UPDATE Hours Saga for User', response)
+    } catch (error) {
+      console.log('Error while updating time request', error);
+      
+    }
+  }
+
 function* notificationSaga() {
   yield takeLatest('FETCH_NOTIFICATION_ADMIN', fetchNotification);
   yield takeLatest('FETCH_TIMESHEET_REVIEW', getReviewTimesheet);
   yield takeLatest('UPDATE_REQUEST', updateRequest);
   yield takeLatest('GRAB_NOTIFICIATION_USER', grabNotificationUser);
-  yield takeLatest('GRAB_EDIT_USER', getEditUser);
+  yield takeLatest('GRAB_HOURS_USER', getEditUser);
+  yield takeLatest('UPDATE_HOURS', updateHours);
 }
 
 export default notificationSaga;
