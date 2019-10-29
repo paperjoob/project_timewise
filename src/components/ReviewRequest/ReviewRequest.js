@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import Swal from 'sweetalert2'
+import './ReviewRequest.css';
 
 class ReviewRequest extends Component {
 
@@ -60,18 +61,52 @@ class ReviewRequest extends Component {
         const timeDetails = this.props.review.map( (time) => {
             return (  
                 <>
-                <li>Employee Name: {time.first_name} {time.last_name}</li>
-                <li>Employee ID: {time.id}</li>
-                <li>{time.monday} : {time.monday_hours}</li>
-                <li>{time.tuesday} : {time.tuesday_hours}</li>
-                <li>{time.wednesday} : {time.wednesday_hours}</li>
-                <li>{time.thursday} : {time.thursday_hours}</li>
-                <li>{time.friday} : {time.friday_hours}</li>
-                <li>Approved: {time.is_approved.toString()}</li>
-                <li>Deny Request: {time.deny_request.toString()}</li>
-                <li>Total Hours: {time.total}</li>
-                <br />
-                <textarea></textarea>
+                <table className='reviewTable'>
+                    <tbody>
+                    <tr>
+                    <th className='reviewHead'>Name</th>
+                    <td className='reviewData'>{time.first_name} {time.last_name}</td>
+                </tr>
+                <tr>
+                    <th className='reviewHead'>ID</th>
+                    <td className='reviewData'>{time.id}</td>
+                </tr>
+                <tr>
+                    <th className='reviewHead'>{time.monday} </th>
+                    <td className='reviewData'>{time.monday_hours}</td>
+                </tr>
+                <tr>
+                    <th className='reviewHead'>{time.tuesday}</th>
+                    <td className='reviewData'>{time.tuesday_hours}</td>
+                </tr>
+                <tr>
+                    <th className='reviewHead'>{time.wednesday}</th>
+                    <td className='reviewData'>{time.wednesday_hours}</td>
+                </tr>
+                <tr>
+                    <th className='reviewHead'>{time.thursday}</th>
+                    <td className='reviewData'>{time.thursday_hours}</td>
+                </tr>
+                <tr>
+                    <th className='reviewHead'>{time.friday}</th>
+                    <td className='reviewData'>{time.friday_hours}</td>
+                </tr>
+                <tr>
+                    <th className='reviewHead'>Approved</th>
+                    <td className='reviewData'>{time.is_approved.toString()}</td>
+                </tr>
+                {/* <tr>
+                    <th>Deny Request</th>
+                    <td>{time.deny_request.toString()}</td>
+                </tr> */}
+                <tr>
+                    <th className='reviewHead'>Total Hours</th>
+                    <td className='reviewData'>{time.total}</td>
+                </tr>
+                    </tbody>
+                </table>
+            
+                {/* <textarea></textarea> */}
                 <br />
                 <button onClick={this.handleApprove}>Approve</button>
                 <button onClick={this.handleDeny}>Deny</button>
@@ -81,11 +116,11 @@ class ReviewRequest extends Component {
 
         return (
 
-            <div>
-                <h1>Review</h1>
-                <ul>
+            <div className='reviewDiv'>
+                <h1>Review Request</h1>
+                {/* <ul> */}
                     {timeDetails}
-                </ul>
+                {/* </ul> */}
                 {/* <p>{JSON.stringify(this.props.review)}</p> */}
             </div>
         )
