@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
+import './EditTimesheet.css';
 import Swal from 'sweetalert2'
 
 class EditTimesheet extends Component {
@@ -145,7 +145,7 @@ class EditTimesheet extends Component {
 
         return (
 
-            <div>
+            <div className='editTimeDiv'>
                 <h1>Edit Timesheet</h1>
                     {timeDetails}
                 <p>{JSON.stringify(this.props.userNotification)}</p>
