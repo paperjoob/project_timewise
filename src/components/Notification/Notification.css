@@ -1,0 +1,27 @@
+.adminNotificationDiv {
+    margin: auto;
+    text-align: center;
+    align-content: center;
+}
+
+.adminList {
+    list-style-type:none;
+}
+
+.listAdmin {
+    background: lemonchiffon;
+    padding: 15px;
+    width: 650px;
+    margin: auto;
+    padding: auto;
+    border-radius: 4px;
+}
+
+.listAdmin:hover {
+    background: gold;
+}
+
+.notificationsText {
+    color: firebrick;
+    text-decoration: underline;
+}

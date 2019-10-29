@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { AddAlert} from '@material-ui/icons';
+import './Notification.css';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
@@ -26,16 +28,16 @@ class Notification extends Component {
     const notificationList = this.props.adminNotification.map( (notify) => {
       return (  
         <>
-        <li>{notify.first_name} {notify.last_name} has submitted the timesheet beginning on {notify.monday}. <button onClick={() => {this.handleReview(notify)} }>Review Request</button></li>
+        <ul className='adminList'>
+        <li className="listAdmin">{notify.first_name} {notify.last_name} has submitted the timesheet beginning on {notify.monday}. <button onClick={() => {this.handleReview(notify)} }>Review Request</button></li>
+        </ul>
         </>
       )
   })
     return (
       <div>
-        <h2>Notifications</h2>
-        <ul>
+          <h2 className='notificationsText'>Notifications <AddAlert /> </h2>
           {notificationList}
-        </ul>
       </div>
     )
   }
