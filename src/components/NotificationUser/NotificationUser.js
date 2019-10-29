@@ -28,6 +28,7 @@ class NotificationUser extends Component {
     const notificationList = this.props.userNotification.map( (notify) => {
       return (  
         <>
+        <h2>Notifications</h2>
         <li>{notify.first_name}, please revise your timesheet for the week starting {notify.monday}. Comment: {notify.comments} <button onClick={() => {this.handleEdit(notify)} }>Edit Timesheet</button></li>
         </>
       )
@@ -35,7 +36,6 @@ class NotificationUser extends Component {
 
     return (
       <div>
-        <h2>User Notifications</h2>
         <ul>
           {notificationList}
         </ul>

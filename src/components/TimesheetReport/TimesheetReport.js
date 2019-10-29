@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import './TimesheetReport.css';
+
 class TimesheetReport extends Component {
 
     // display profile details by calling the getProfile function
@@ -31,7 +33,7 @@ class TimesheetReport extends Component {
                 )
             })
         return (
-            <div>
+            <div className='timesheetDiv'>
                 <h1>Timesheet Report</h1>
                 <ul>
                     {weekList}

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import './TimeReportAdmin.css';
+
 class TimeReportAdmin extends Component {
 
     // display profile details by calling the getProfile function
@@ -45,7 +47,7 @@ class TimeReportAdmin extends Component {
                 )
             })
         return (
-            <div>
+            <div className='adminTimesheetDiv'>
                 <h1>Timesheet Report</h1>
                     {weekList}
                 <p>{JSON.stringify(this.props.timesheet)}</p>

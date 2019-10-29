@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import './AddTime.css';
 
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
@@ -176,29 +177,21 @@ class AddTime extends Component {
     
     render() {
 
-        // const dateList = this.state.daysWorked.map( (day, id) => {
-        //     return (
-        //         <tr key={id}>
-        //             <td >{day}</td><td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'hours_worked')}} placeholder='hours'></input></td>
-        //         </tr>
-        //     )
-        // })
-
         console.log('RENDER', this.state)
 
         return (
-            <div>
+            <div className='timecardDiv'>
                 <h1>My Timecard</h1>
                 <h4>Please only submit your timesheet once per week.</h4>
                 <table >
                     <tbody>
                         <tr><th>Current Week</th></tr>
                         <tr>
-                            <td>MON <br/>{this.state.daysWorked[0]}</td>
-                            <td>TUE <br/>{this.state.daysWorked[1]}</td>
-                            <td>WED <br/>{this.state.daysWorked[2]}</td>
-                            <td>THU <br/>{this.state.daysWorked[3]}</td>
-                            <td>FRI <br/>{this.state.daysWorked[4]}</td>
+                            <td>Monday<br/>{this.state.daysWorked[0]}</td>
+                            <td>Tuesday<br/>{this.state.daysWorked[1]}</td>
+                            <td>Wednesday<br/>{this.state.daysWorked[2]}</td>
+                            <td>Thursday<br/>{this.state.daysWorked[3]}</td>
+                            <td>Friday<br/>{this.state.daysWorked[4]}</td>
                         </tr>
                         <tr>
                             <td><input type='number' step="0.25" onChange={(event) => {this.inputHours(event, 'monday_hours')}} placeholder={this.state.monday_hours} ></input></td>

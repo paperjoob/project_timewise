@@ -39,8 +39,9 @@ th {
     text-align: center;
 }
 
-td {
+.userInput {
     padding: 15px;
+    margin-bottom: 10px;
 }
 
 button {

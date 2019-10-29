@@ -95,11 +95,11 @@ class UserPage extends Component {
         <table className="timeTable">
             <tbody>
                 <tr>
-                    <td>MON <br/>{this.state.daysWorked[0]}</td>
-                    <td>TUE <br/>{this.state.daysWorked[1]}</td>
-                    <td>WED <br/>{this.state.daysWorked[2]}</td>
-                    <td>THU <br/>{this.state.daysWorked[3]}</td>
-                    <td>FRI <br/>{this.state.daysWorked[4]}</td>
+                    <td className="userInput">Monday <br/>{this.state.daysWorked[0]}</td>
+                    <td className="userInput">Tuesday <br/>{this.state.daysWorked[1]}</td>
+                    <td className="userInput">Wednesday <br/>{this.state.daysWorked[2]}</td>
+                    <td className="userInput">Thursday <br/>{this.state.daysWorked[3]}</td>
+                    <td className="userInput">Friday <br/>{this.state.daysWorked[4]}</td>
                 </tr>
                 {timeDetails}
             </tbody>

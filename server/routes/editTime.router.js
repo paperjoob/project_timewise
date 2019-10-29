@@ -22,15 +22,15 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     const updatedTime = req.body;
     let queryText = `UPDATE "hours" SET "monday_hours" = $1, "tuesday_hours" = $2, "wednesday_hours" = $3, "thursday_hours" = $4, "friday_hours" = $5,
-    "total" = $6, "comments" = $7, "deny_request" = false WHERE "id" = $8`;
+    "comments" = $6,     "total" = $7, "deny_request" = false WHERE "id" = $8`;
     let queryValues = [
         updatedTime.monday_hours,
         updatedTime.tuesday_hours,
         updatedTime.wednesday_hours,
         updatedTime.thursday_hours,
         updatedTime.friday_hours,
-        updatedTime.total,
         updatedTime.comments,
+        updatedTime.total,
         // updatedTime.deny_request,
         updatedTime.id
     ];

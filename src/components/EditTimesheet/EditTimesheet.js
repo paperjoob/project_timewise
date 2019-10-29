@@ -12,8 +12,8 @@ class EditTimesheet extends Component {
             wednesday_hours: '',
             thursday_hours: '',
             friday_hours: '',
-            total: '',
             comments: '',
+            total: '',
             id: this.props.match.params.id
         }
     }
@@ -34,8 +34,8 @@ class EditTimesheet extends Component {
                     wednesday_hours: edit.wednesday_hours,
                     thursday_hours: edit.thursday_hours,
                     friday_hours: edit.friday_hours,
-                    total: edit.total,
                     comments: edit.comments,
+                    total: edit.total,
                     id: this.props.match.params.id
                 }
             })
@@ -51,7 +51,7 @@ class EditTimesheet extends Component {
         console.log('get Edit TIME', this.props.userNotification)
     }
 
-    // approve the request from false to true
+    // sends dispatch to Saga to update hours
     handleSave = () => {
         this.calculateHours();
 
@@ -80,6 +80,20 @@ class EditTimesheet extends Component {
         })
     }
 
+    // sums up week hours
+    calculateHours = () => {
+        let mon = this.state.editTime.monday_hours;
+        let tue = this.state.editTime.tuesday_hours;
+        let wed = this.state.editTime.wednesday_hours;
+        let thu = this.state.editTime.thursday_hours;
+        let fri = this.state.editTime.friday_hours;
+        this.setState({
+            ...this.state.editTime.total,
+            total: parseFloat(mon) + parseFloat(tue) + parseFloat(wed) + parseFloat(thu) + parseFloat(fri)
+        })
+        console.log('in CALCULATE HOURS', this.state.editTime.total);
+    }
+
     handleBack = () => {
         console.log('in handleBack');
         this.props.history.push('/home')
@@ -93,20 +107,6 @@ class EditTimesheet extends Component {
                 [propertyName]: event.target.value
             }
         })
-    }
-
-    // sums up week hours
-    calculateHours = () => {
-        let mon = this.state.editTime.monday_hours;
-        let tue = this.state.editTime.tuesday_hours;
-        let wed = this.state.editTime.wednesday_hours;
-        let thu = this.state.editTime.thursday_hours;
-        let fri = this.state.editTime.friday_hours;
-        this.setState({
-            ...this.state.editTime.total,
-            total: parseFloat(mon) + parseFloat(tue) + parseFloat(wed) + parseFloat(thu) + parseFloat(fri)
-        })
-        console.log('in CALCULATE HOURS', this.state.editTime.total);
     }
 
     render() {
@@ -126,16 +126,16 @@ class EditTimesheet extends Component {
                             <td>{time.friday}</td>
                         </tr>
                         <tr>  
-                            <td><input value={this.state.editTime.monday_hours} onChange={(event) => {this.handleChange(event, 'monday_hours')}}></input></td>
-                            <td><input value={this.state.editTime.tuesday_hours} onChange={(event) => {this.handleChange(event, 'tuesday_hours')}}></input></td>
-                            <td><input value={this.state.editTime.wednesday_hours} onChange={(event) => {this.handleChange(event, 'wednesday_hours')}}></input></td>
-                            <td><input value={this.state.editTime.thursday_hours} onChange={(event) => {this.handleChange(event, 'thursday_hours')}}></input></td>
-                            <td><input value={this.state.editTime.friday_hours} onChange={(event) => {this.handleChange(event, 'friday_hours')}}></input></td>
+                            <td><input type='number' step="0.25" value={this.state.editTime.monday_hours} onChange={(event) => {this.handleChange(event, 'monday_hours')}}></input></td>
+                            <td><input type='number' step="0.25" value={this.state.editTime.tuesday_hours} onChange={(event) => {this.handleChange(event, 'tuesday_hours')}}></input></td>
+                            <td><input type='number' step="0.25" value={this.state.editTime.wednesday_hours} onChange={(event) => {this.handleChange(event, 'wednesday_hours')}}></input></td>
+                            <td><input type='number' step="0.25" value={this.state.editTime.thursday_hours} onChange={(event) => {this.handleChange(event, 'thursday_hours')}}></input></td>
+                            <td><input type='number' step="0.25" value={this.state.editTime.friday_hours} onChange={(event) => {this.handleChange(event, 'friday_hours')}}></input></td>
                         </tr>
                     </tbody>
                 </table>
                 <br />
-                <textarea value={this.state.editTime.comments}></textarea>
+                <textarea onChange={(event) => {this.handleChange(event, 'comments')}} value={this.state.editTime.comments}></textarea>
                 <br />
                 <button onClick={this.handleBack}>Back</button>
                 <button onClick={this.handleSave}>Submit</button>
@@ -149,7 +149,7 @@ class EditTimesheet extends Component {
                 <h1>Edit Timesheet</h1>
                     {timeDetails}
                 <p>{JSON.stringify(this.props.userNotification)}</p>
-                <div>Total Hours: {this.state.editTime.total} </div>
+                <p onChange={(event) => {this.handleChange(event, 'total')}}>Total Hours: {this.state.editTime.total} </p>
             </div>
         )
     }
