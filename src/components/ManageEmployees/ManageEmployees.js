@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import './ManageEmployees.css';
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -81,7 +83,7 @@ class ManageEmployees extends Component {
         })
 
         return (
-            <div>
+            <div className='manageDiv'>
                 <h1>Employee Information</h1>
                 <Paper className={classes.root}>
                     <Table className={classes.table}>

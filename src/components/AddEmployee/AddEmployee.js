@@ -126,6 +126,15 @@ handleAdd = (event) => {
               margin="normal"
             />
             <TextField
+              id="password"
+              label="Password"
+              className={classes.textField}
+              value={this.state.password}
+              type="password"
+              onChange={this.handleInputChangeFor('password')}
+              margin="normal"
+            />
+            <TextField
               id="first_name"
               label="First Name"
               className={classes.textField}
