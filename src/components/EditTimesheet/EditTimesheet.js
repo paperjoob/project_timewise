@@ -13,7 +13,7 @@ class EditTimesheet extends Component {
             thursday_hours: '',
             friday_hours: '',
             comments: '',
-            total: '',
+            total: 0,
             id: this.props.match.params.id
         }
     }
@@ -75,8 +75,8 @@ class EditTimesheet extends Component {
                 'Time has been added.',
                 'success'
               )
-            }
-            this.getTime();   
+              this.getTime(); 
+            }  
         })
     }
 
@@ -148,7 +148,7 @@ class EditTimesheet extends Component {
             <div className='editTimeDiv'>
                 <h1>Edit Timesheet</h1>
                     {timeDetails}
-                <p>{JSON.stringify(this.props.userNotification)}</p>
+                {/* <p>{JSON.stringify(this.props.userNotification)}</p> */}
                 <p onChange={(event) => {this.handleChange(event, 'total')}}>Total Hours: {this.state.editTime.total} </p>
             </div>
         )
