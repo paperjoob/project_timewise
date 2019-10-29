@@ -84,6 +84,23 @@ handleAdd = (event) => {
     this.props.history.push('/manage');
   }
 
+  // fill in data for local state
+  addValues = () => {
+    console.log('in addValues');
+    this.setState({
+      username: 'jill',
+      password: 'root',
+      first_name: 'Jill',
+      last_name: 'Valentine',
+      email: 'jvalentine@gmail.com',
+      street: '234 Raccoon Street',
+      city: 'Raccoon City',
+      state: 'KS',
+      zipcode: '29341',
+      phone: '7641234985',
+    })
+  }
+
   render() {
 
   const { classes } = this.props;
@@ -98,7 +115,7 @@ handleAdd = (event) => {
             {this.props.errors.addEmployeeMessage}
           </h2>
         )}
-        <h1 className='addh1'>ADD NEW EMPLOYEE</h1>
+        <h1 className='addh1' onClick={this.addValues}>ADD NEW EMPLOYEE</h1>
         <form className='addEmpForm' onSubmit={this.handleAdd} noValidate autoComplete="off">
             <TextField
               id="username"
