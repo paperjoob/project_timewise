@@ -27,7 +27,7 @@ function* getReviewTimesheet(action) {
     }
   }
 
-  // put router to update the status of the time request
+  // put router to update the status of the time request - APPROVE
   function* updateRequest(action) {
     try {
       const response = yield axios.put(`/review/:id`, action.payload);
@@ -37,6 +37,17 @@ function* getReviewTimesheet(action) {
       
     }
   }
+
+    // put router to update the status of the time request - DENY
+    function* denyRequest(action) {
+      try {
+        const response = yield axios.put(`/review/:id/deny`, action.payload);
+        console.log('Deny REQUEST SAGA---', response)
+      } catch (error) {
+        console.log('Error while updating time request', error);
+        
+      }
+    }
 
 //////////////// USER NOTIFICATIONS ///////////////
 
@@ -82,6 +93,7 @@ function* notificationSaga() {
   yield takeLatest('FETCH_NOTIFICATION_ADMIN', fetchNotification);
   yield takeLatest('FETCH_TIMESHEET_REVIEW', getReviewTimesheet);
   yield takeLatest('UPDATE_REQUEST', updateRequest);
+  yield takeLatest('DENY_REQUEST', denyRequest);
   yield takeLatest('GRAB_NOTIFICIATION_USER', grabNotificationUser);
   yield takeLatest('GRAB_HOURS_USER', getEditUser);
   yield takeLatest('UPDATE_HOURS', updateHours);

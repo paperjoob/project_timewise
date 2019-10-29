@@ -35,4 +35,21 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
       });
   });
 
+  router.put('/:id/deny', rejectUnauthenticated, (req, res) => {
+    const updatedRequest = req.body;
+    const queryText = `UPDATE "hours" SET "deny_request" = true, "comments" = $1 WHERE "id" = $2;`;
+    const queryValues = [
+        updatedRequest.comments,
+        updatedRequest.id
+        ];
+    pool.query(queryText, queryValues)
+      .then(() => { res.sendStatus(200); 
+        console.log(queryValues)
+    })
+      .catch((err) => {
+        console.log('-- Review Router Error for PUT --', err);
+        res.sendStatus(500);
+      });
+  });
+
 module.exports = router;

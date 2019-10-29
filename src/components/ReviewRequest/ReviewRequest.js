@@ -8,6 +8,7 @@ class ReviewRequest extends Component {
 
     state = {
         updateRequest: {
+            comments: '',
             id: this.props.match.params.id
         }
     }
@@ -54,6 +55,20 @@ class ReviewRequest extends Component {
 
     handleDeny = () => {
         console.log('in handleDENY');
+        this.props.dispatch({
+            type: 'DENY_REQUEST',
+            payload: this.state.updateRequest
+        })
+    }
+
+    handleChange = (event, propertyName) => {
+        console.log(event.target.value);
+        this.setState({
+            updateRequest: {
+                ...this.state.updateRequest,
+                [propertyName]: event.target.value
+            }
+        })
     }
 
     render() {
@@ -106,7 +121,7 @@ class ReviewRequest extends Component {
                     </tbody>
                 </table>
             
-                {/* <textarea></textarea> */}
+                <textarea onChange={(event) => {this.handleChange(event, 'comments')}}></textarea>
                 <br />
                 <button onClick={this.handleApprove}>Approve</button>
                 <button onClick={this.handleDeny}>Deny</button>
