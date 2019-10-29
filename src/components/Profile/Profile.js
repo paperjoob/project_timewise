@@ -115,6 +115,22 @@ class Profile extends Component {
         })
     }
 
+    addValue = () => {
+        this.setState({
+            details: {
+                first_name: 'Barry',
+                last_name: 'Burton',
+                email: 'barry@gmail.com',
+                street: '444 Barry Street',
+                city: 'Alexandria',
+                state: 'MN',
+                zipcode: '52300',
+                phone: '6082836662',
+                id: this.props.user.id
+            }
+     })
+    }
+
     render() {
 
         const { classes } = this.props;
@@ -140,7 +156,7 @@ class Profile extends Component {
                 <div className="cardBox">
                 <Card className={classes.card}>
                     <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom onClick={this.addValue}>
                         Profile
                     </Typography>
                         <table className="profileTable">
