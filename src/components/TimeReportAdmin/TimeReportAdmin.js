@@ -32,6 +32,7 @@ class TimeReportAdmin extends Component {
                                 <td>{time.wednesday}</td>
                                 <td>{time.thursday}</td>
                                 <td>{time.friday}</td>
+                                <td>Total Hours</td>
                             </tr>
                             <tr>  
                                 <td>{time.monday_hours}</td>
@@ -39,6 +40,7 @@ class TimeReportAdmin extends Component {
                                 <td>{time.wednesday_hours}</td>
                                 <td>{time.thursday_hours}</td>
                                 <td>{time.friday_hours}</td>
+                                <td>{time.total}</td>
                             </tr>
                         </tbody>
 
