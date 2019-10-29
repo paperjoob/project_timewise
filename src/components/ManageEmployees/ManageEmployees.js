@@ -109,7 +109,12 @@ class ManageEmployees extends Component {
                     </Table>
                 </Paper>
                 <div>
-                    <button onClick={this.handleAddEmp}>Add Employee</button>
+                    <input
+                      className="addEmp"
+                      value="Add Employee"
+                      type='submit'
+                      onClick ={this.handleAddEmp}
+                    />
                 </div>
             </div>
         )

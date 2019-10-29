@@ -1,3 +1,18 @@
 .manageDiv {
     padding: 15px;
 }
+
+.addEmp {
+    background-color: brown;
+    border-radius: 4px;
+    color: #f8f8f8;
+    min-height: 50px;
+    min-width: 100px;
+    outline:0;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.addEmp:hover {
+    background-color: maroon;
+}
