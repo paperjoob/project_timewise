@@ -9,7 +9,7 @@ const AboutPage = () => (
   <div>
     <div>
       <p>
-        This about page is for anyone to read!
+        TimeWise is a timesheet application where users can enter in their work week hours.
       </p>
     </div>
   </div>
