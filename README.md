@@ -1,6 +1,6 @@
 # Project TimeWise
 
-TimeWise is a web application where users can enter their time in for the current week. Administrators have the ability to create, delete, and update users. They also have the ability to approve or deny timesheets.
+TimeWise is a web application where users can enter their time in for the current week. Administrators have the ability to create, delete, and update users. They also have the ability to approve timesheets.
 
 This version uses React, Redux, Express, Passport, PostgreSQL, Material UI, SweetAlerts2 (a full list of dependencies can be found in `package.json`).
 
@@ -31,8 +31,23 @@ If you would like to name your database something else, you will need to change 
 * Run `npm run client`
 * Navigate to `localhost:3000`
 
+## Completed Features
+- [x] Admin can create new users
+- [x] Admin can delete and update users
+- [x] Admin can approve timesheets
+- [x] Users can enter in hours
+- [x] Users can update profile details
+
+## Next Steps
+Features that you would like to add at some point in the future.
+- [ ] Navigate to past and future weeks
+- [ ] Update total hours when editing timesheets
+
 ## Lay of the Land
 
 * `src/` contains the React application
 * `public/` contains static assets for the client-side
 * `server/` contains the Express App
+
+## Authors
+* See Yang
