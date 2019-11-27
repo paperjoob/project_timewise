@@ -5,12 +5,12 @@ import './TimeReportAdmin.css';
 
 class TimeReportAdmin extends Component {
 
-    // display profile details by calling the getProfile function
+    // display profile details by calling the getAllTime function
     componentDidMount() {
         this.getAllTime();
     }
 
-    // send dispatch to the FETCH_PROFILE profileSaga
+    // send dispatch to the GET_ALL_TIME saga
     getAllTime = () => {
         this.props.dispatch({
             type: 'GET_ALL_TIME'

@@ -20,7 +20,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import InfoIcon from '@material-ui/icons/Info';
 import AccountIcon from '@material-ui/icons/AccountCircle';
 import ListIcon from '@material-ui/icons/ListAlt'
 
@@ -66,7 +65,6 @@ function SideDrawer(props) {
                 {props.user.admin === false ? <ListItem component={Link} to="/timesheetreport" button><ListIcon className="icon" /> Timesheet Reports</ListItem> : <div></div>}
                 {props.user.admin === true ? <ListItem component={Link} to="/timesheetreport/admin" button><ListIcon className="icon" /> Timesheet Reports</ListItem> : <div></div>}
                 {props.user.admin === true ? <ListItem component={Link} to="/manage" button><ListIcon className="icon" /> Manage Employees</ListItem> : <div></div>}
-                <ListItem component={Link} to="/about" button><InfoIcon className="icon" /> About</ListItem>
             </List>
 
             <Divider />

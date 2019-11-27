@@ -36,6 +36,7 @@ class AddEmployee extends Component {
   };
 
 // swal alert for adding user
+// send dispatch to saga 'ADD_EMPLOYEE'
 handleAdd = (event) => {
     event.preventDefault();
 
@@ -217,9 +218,6 @@ handleAdd = (event) => {
   }
 }
 
-// Instead of taking everything from state, we just want the error messages.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = state => ({
   errors: state.errors,
 });

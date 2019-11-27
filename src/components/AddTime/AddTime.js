@@ -59,17 +59,17 @@ class AddTime extends Component {
                         submitted: time.submitted
                 })
             }
-            // else{
-            //     this.setState({
-            //         monday_hours:  0,
-            //         tuesday_hours: 0,
-            //         wednesday_hours: 0,
-            //         thursday_hours: 0,
-            //         friday_hours: 0,
-            //         total: 0,
-            //         submitted: false
-            //     })
-            // }
+            else{
+                this.setState({
+                    monday_hours:  0,
+                    tuesday_hours: 0,
+                    wednesday_hours: 0,
+                    thursday_hours: 0,
+                    friday_hours: 0,
+                    total: 0,
+                    submitted: false
+                })
+            }
         }
     }
 
@@ -89,9 +89,6 @@ class AddTime extends Component {
             submitted: true
         });
         this.calculateHours();
-        // if (this.state.submitted === true) {
-        //     alert ('Your time for this week has already been submitted.');
-        // } else {
             Swal.fire({
                 title: 'Are all of the information correct?',
                 text: "You will not be able to make any changes after submittal. Proceed?",
@@ -120,8 +117,7 @@ class AddTime extends Component {
                             submitted: this.state.submitted,
                             is_approved: this.state.is_approved,
                             deny_request: this.state.deny_request
-                        }
-                        
+                        }  
                     });
                     this.props.dispatch({
                         type: 'CLEAR_TIME',
@@ -130,7 +126,7 @@ class AddTime extends Component {
                     'Success',
                     'Timesheet submitted!',
                     'success'
-                  )
+                  );
                 }
               })
         // }
@@ -153,7 +149,6 @@ class AddTime extends Component {
             begin.add(1, 'd');
         }
         this.setState({state: this.state})
-        // get request
     }
 
     // sums up week hours
